@@ -4,22 +4,22 @@ import React, { useState } from 'react';
 // All data sourced from real evidence files:
 //   evidence/gate-3-final-result.yaml   -> invoice_batch proof
 //   evidence/gate-4-rollup-result.yaml  -> batchguard_rollup proof
-// Evidence labels: LOCAL_ONLY (Stellar Standalone Network, Google Cloud Shell)
+// Evidence labels: TESTNET_VERIFIED for Gate 5 public Stellar testnet evidence; LOCAL_ONLY retained only for earlier localnet evidence.
 
 const SINGLE = {
-  contractId: 'CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I',
+  contractId: 'CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3',
   proofSize: '14,592',
   publicInputsSize: '128',
   cpuPct: '78.1',
   minFee: '881,756',
-  txHash: 'f5d12685edcb63edc5d89cf64b93b219feea1933a20858ad1c6addbcd721805f',
+  txHash: '41b5c622be8338c4b4fa80a4df5efa5aaef0b432fd01b70ea97f54924d7f2cf7',
   policy: { perInvoiceLimit: '2,500', batchTotalLimit: '7,000', maxVendorRisk: '5', batchCommitment: '5,042,103,274' },
 };
 
 const ROLLUP = {
-  contractId: 'CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY',
+  contractId: 'CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW',
   proofSize: '14,592',
-  txHash: 'e7e1cee2b8359665d21a82a5e1afddbf3366bd6fec556dba08738bdd2e0e6f91',
+  txHash: 'c11debba862e859b59ae97fc00197c86280f07eadcbb8f559f2532ec4c0c86e4',
   policy: { perInvoiceLimit: '2,500', batchTotalLimit: '7,000', maxVendorRisk: '5', rollupCommitment: '4,799,043,355,065,008' },
 };
 
@@ -73,7 +73,7 @@ function Hero() {
         <span className="hero-pill"><span className="hero-pill-icon">⬡</span> Stellar Soroban</span>
         <span className="hero-pill"><span className="hero-pill-icon">◈</span> Noir + UltraHonk</span>
         <span className="hero-pill"><span className="hero-pill-icon">◉</span> Real-World ZK</span>
-        <span className="hero-pill"><span className="hero-pill-icon">☁</span> Localnet proven</span>
+        <span className="hero-pill"><span className="hero-pill-icon">☁</span> Testnet verified</span>
       </div>
     </section>
   );
@@ -87,7 +87,7 @@ function CommandCenter({ activeProfile, setActiveProfile, replayMode, setReplayM
           <div className="command-center-badge">Simulation Console</div>
           <h2 className="command-center-title">Evidence Replay Command Center</h2>
           <p className="command-center-sub">
-            Replay the recorded localnet proof outcomes: a valid private batch is accepted by the Soroban verifier, while a tampered proof is rejected.
+            Replay recorded public Stellar testnet evidence: valid proofs are accepted by the Soroban verifier, while tampered proofs are rejected during Soroban testnet simulation.
           </p>
         </div>
 
@@ -157,7 +157,7 @@ function CommandCenter({ activeProfile, setActiveProfile, replayMode, setReplayM
         <div className="replay-status-bar">
           <span className="status-label-indicator">Status:</span>
           <span className="status-value-text">
-            Static replay of recorded evidence · Localnet state simulated
+            Static replay of recorded evidence · Public testnet evidence
           </span>
         </div>
       </div>
@@ -198,8 +198,8 @@ function FlowStrip({ replayMode, activeProfile }) {
         </div>
         <div className="flow-step-body">
           {isValid 
-            ? 'Soroban localnet verifier accepted and verified the proof'
-            : 'Soroban localnet verifier rejected the proof (tamper detected)'}
+            ? 'Soroban public testnet verifier accepted and verified the proof'
+            : 'Soroban public testnet simulation rejected the proof (tamper detected)'}
         </div>
       </div>
     </div>
@@ -218,7 +218,7 @@ function SingleBatchCard({ replayMode }) {
             <div className="proof-card-sub">4 invoices · 3 policy rules · 1 Soroban call</div>
           </div>
           <span className={`status-badge ${isValid ? 'pass' : 'rejected'}`}>
-            {isValid ? 'Soroban localnet verifier accepted' : 'Soroban localnet verifier rejected'}
+            {isValid ? 'Soroban public testnet verifier accepted' : 'Soroban public testnet simulation rejected'}
           </span>
         </div>
 
@@ -240,10 +240,10 @@ function SingleBatchCard({ replayMode }) {
           <div className="proof-result active-result">
             <div className="proof-result-header">
               <span className="proof-result-title">Replay: Valid proof outcome</span>
-              <span className="evidence-label">LOCAL_ONLY</span>
+              <span className="evidence-label">TESTNET_VERIFIED</span>
             </div>
             <div className="proof-result-body accepted">
-              ✓ ACCEPTED — Proof successfully verified on Soroban localnet
+              ✓ ACCEPTED — Proof successfully verified on Soroban public testnet
               <div className="mono-sm">tx: {SINGLE.txHash}</div>
             </div>
           </div>
@@ -251,7 +251,7 @@ function SingleBatchCard({ replayMode }) {
           <div className="proof-result active-result">
             <div className="proof-result-header">
               <span className="proof-result-title">Replay: Tampered proof outcome</span>
-              <span className="evidence-label">LOCAL_ONLY</span>
+              <span className="evidence-label">TESTNET_VERIFIED</span>
             </div>
             <div className="proof-result-body rejected-txt">
               ✗ REJECTED — HostError: Error(Contract, #4)
@@ -298,7 +298,7 @@ function RollupCard({ replayMode }) {
             <div className="proof-card-sub">8 invoices · 2 batches · 1 Soroban call</div>
           </div>
           <span className={`status-badge ${isValid ? 'pass' : 'rejected'}`}>
-            {isValid ? 'Soroban localnet verifier accepted' : 'Soroban localnet verifier rejected'}
+            {isValid ? 'Soroban public testnet verifier accepted' : 'Soroban public testnet simulation rejected'}
           </span>
         </div>
 
@@ -324,10 +324,10 @@ function RollupCard({ replayMode }) {
           <div className="proof-result active-result">
             <div className="proof-result-header">
               <span className="proof-result-title">Replay: Valid rollup proof outcome</span>
-              <span className="evidence-label">LOCAL_ONLY</span>
+              <span className="evidence-label">TESTNET_VERIFIED</span>
             </div>
             <div className="proof-result-body accepted">
-              ✓ ACCEPTED — Proof successfully verified on Soroban localnet
+              ✓ ACCEPTED — Proof successfully verified on Soroban public testnet
               <div className="mono-sm">tx: {ROLLUP.txHash}</div>
             </div>
           </div>
@@ -335,7 +335,7 @@ function RollupCard({ replayMode }) {
           <div className="proof-result active-result">
             <div className="proof-result-header">
               <span className="proof-result-title">Replay: Tampered rollup proof outcome</span>
-              <span className="evidence-label">LOCAL_ONLY</span>
+              <span className="evidence-label">TESTNET_VERIFIED</span>
             </div>
             <div className="proof-result-body rejected-txt">
               ✗ REJECTED — HostError: Error(Contract, #4)
@@ -421,7 +421,7 @@ function VisibilityCard({ revealWitness, activeProfile }) {
             <div className="proof-card-title">Settlement Visibility</div>
             <div className="proof-card-sub">What the chain sees vs. what stays in the ZK circuit</div>
           </div>
-          <span className="evidence-label">{isRollup ? 'BatchGuard Rollup' : 'Single Batch'} · Localnet</span>
+          <span className="evidence-label">{isRollup ? 'BatchGuard Rollup' : 'Single Batch'} · Public Testnet</span>
         </div>
 
         <div className="split-grid">
@@ -472,7 +472,7 @@ function TrustPanel() {
     { icon: '◈', title: 'ZK Circuit', body: 'Noir + UltraHonk. Invoice amounts and vendor risk scores are private witnesses. Policy rules are public inputs verified on-chain by Soroban.' },
     { icon: '⬡', title: 'Stellar Soroban', body: 'UltraHonk verifier contract. Protocol 25/26 BN254 host functions make on-chain proof verification possible and affordable.' },
     { icon: '◉', title: 'Reject Path', body: 'Tampered proof (single byte XOR 0xFF) rejected with HostError(Contract, #4). Forgery fails deterministically without revealing anything.' },
-    { icon: '↯', title: 'All Evidence Real', body: 'Every result from real executions in Google Cloud Shell against Stellar Standalone Network. No simulated outputs in evidence files.' },
+    { icon: '↯', title: 'All Evidence Real', body: 'Results are backed by real Stellar public testnet and localnet evidence from Google Cloud Shell. Valid proofs were submitted; tampered proofs were rejected during Soroban testnet simulation.' },
   ];
 
   const gates = [
@@ -525,8 +525,8 @@ function TrustPanel() {
       <div className="scope-notice">
         <div className="scope-notice-title">Honest scope — evidence labels</div>
         <div className="scope-notice-body">
-          All results are labeled <strong>LOCAL_ONLY</strong> — executed on Stellar Standalone Network in Google Cloud Shell,
-          not public testnet or mainnet. The commitment scheme is a field-arithmetic weighted sum (demo-appropriate;
+          Gate 5 results are labeled <strong>TESTNET_VERIFIED</strong> — executed on Stellar public testnet from Google Cloud Shell.
+          Earlier localnet evidence is retained. This is not mainnet. The commitment scheme is a field-arithmetic weighted sum (demo-appropriate;
           not a collision-resistant cryptographic hash). The rollup proof is an aggregation-inspired single-circuit proof
           covering two private batches — not recursive proof aggregation. No claims of production readiness,
           live settlement, or wallet functionality are made.
@@ -539,7 +539,7 @@ function TrustPanel() {
 function RoadmapSection() {
   const items = [
     { label: 'ROADMAP_ONLY', text: <><strong>Poseidon commitment</strong> — replace the demo field-arithmetic commitment with a ZK-native hash for production collision resistance.</> },
-    { label: 'ROADMAP_ONLY', text: <><strong>Stellar testnet deployment</strong> — fund via friendbot and deploy to public Stellar testnet. No technical gap; requires unrestricted network egress.</> },
+    { label: 'ROADMAP_ONLY', text: <><strong>Mainnet deployment</strong> — future production hardening, audits, and mainnet deployment. Current evidence is public testnet, not mainnet.</> },
     { label: 'ROADMAP_ONLY', text: <><strong>Dynamic batch input API</strong> — businesses submit invoice batches and receive a commitment + proof, rather than hardcoded witness values.</> },
     { label: 'ROADMAP_ONLY', text: <><strong>N-batch rollup</strong> — extend the multi-batch circuit to N batches via a Merkle commitment over batch commitments.</> },
     { label: 'ROADMAP_ONLY', text: <><strong>Auditor selective disclosure</strong> — encrypted batch packet for authorized auditors; ZK proof guarantees the disclosed data matches the on-chain commitment.</> },
@@ -570,7 +570,7 @@ function Footer() {
           BatchGuard ZK
         </div>
         Stellar Hacks: Real-World ZK · 2026<br/>
-        Stellar Standalone Network (localnet) · Google Cloud Shell<br/>
+        Stellar public testnet + Standalone localnet evidence · Google Cloud Shell<br/>
         Noir + UltraHonk / Barretenberg · Soroban UltraHonk verifier
       </div>
       <div className="footer-right">
@@ -612,7 +612,7 @@ export default function App() {
           <div className="section-label anim-0">Settlement Proofs</div>
           <p className="section-intro anim-0">
             Each proof was generated from a real Noir circuit, submitted to a Stellar Soroban
-            smart contract on localnet, and verified on-chain. Tampered proofs were rejected.
+            smart contract on Stellar public testnet, and verified on-chain. Tampered proofs were rejected during Soroban testnet simulation.
           </p>
           <div className="bento">
             <VisibilityCard revealWitness={revealWitness} activeProfile={activeProfile} />

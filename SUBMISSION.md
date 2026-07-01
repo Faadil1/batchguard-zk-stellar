@@ -22,10 +22,12 @@ A private batch of 4 invoices satisfies payment policy rules — per-invoice cei
 |---|---|---|
 | Noir circuit compiles and test passes | IMPLEMENTED_AND_TESTED | evidence/gate-2-final-result.yaml |
 | Invalid witness rejected at circuit level | IMPLEMENTED_AND_TESTED | evidence/gate-2-final-result.yaml |
-| Soroban verifier deployed on localnet | LOCAL_ONLY | evidence/gate-3-final-result.yaml |
-| Valid proof accepted by Soroban | LOCAL_ONLY | evidence/gate3-valid-invoice-batch-onchain.log |
-| Tampered proof rejected by Soroban | LOCAL_ONLY | evidence/gate3-invalid-invoice-batch-onchain.log |
-| Public testnet or mainnet deployment | ROADMAP_ONLY | — |
+| Soroban verifier deployed on Stellar public testnet for invoice_batch | TESTNET_VERIFIED | evidence/gate-5-testnet/invoice-batch-testnet-result.yaml |
+| Valid invoice_batch proof accepted by Soroban public testnet | TESTNET_VERIFIED | evidence/gate-5-testnet/invoice-batch-testnet.log |
+| Tampered invoice_batch proof rejected during Soroban public testnet simulation | TESTNET_VERIFIED | evidence/gate-5-testnet/invoice-batch-testnet.log |
+| BatchGuard Rollup proof accepted by Soroban public testnet | TESTNET_VERIFIED | evidence/gate-5-testnet/rollup-testnet-result.yaml |
+| Tampered BatchGuard Rollup proof rejected during Soroban public testnet simulation | TESTNET_VERIFIED | evidence/gate-5-testnet/rollup-testnet.log |
+| Mainnet deployment | ROADMAP_ONLY | — |
 | Recursive or aggregated proofs | ROADMAP_ONLY | — |
 
 ## Public inputs
@@ -56,7 +58,7 @@ Implemented result:
 - New circuit: circuits/batchguard_rollup
 - One proof covers two private invoice batches
 - Invalid rollup witness rejected during proof generation
-- Valid rollup proof accepted by Stellar Soroban localnet
+- Valid rollup proof accepted by Stellar Soroban public testnet
 - Tampered rollup proof rejected by the same Soroban contract
 - Rollup contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
 
@@ -66,3 +68,24 @@ Evidence: evidence/gate-4-rollup-result.yaml
 ## Live UI
 
 BatchGuard Settlement Console: https://faadil1.github.io/batchguard-zk-stellar/
+
+
+## Gate 5 — Public Stellar testnet evidence
+
+BatchGuard ZK now includes public Stellar testnet evidence for both proof paths:
+
+- Core `invoice_batch`: valid proof accepted by Soroban public testnet.
+- Core `invoice_batch`: tampered proof rejected during Soroban public testnet simulation.
+- BatchGuard Rollup: valid multi-batch proof accepted by Soroban public testnet.
+- BatchGuard Rollup: tampered rollup proof rejected during Soroban public testnet simulation.
+
+Contract IDs:
+
+- `invoice_batch`: `CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3`
+- `batchguard_rollup`: `CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW`
+
+Scope:
+
+- Public testnet, not mainnet.
+- Hackathon proof-of-concept, not production readiness.
+- BatchGuard Rollup is aggregation-inspired multi-batch verification, not recursive proof aggregation and not a zkRollup.

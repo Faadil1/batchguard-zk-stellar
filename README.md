@@ -45,7 +45,7 @@ The policy parameters are public inputs. The invoice amounts and vendor risk sco
 | ZK system | Noir + UltraHonk / Barretenberg |
 | On-chain verifier | Stellar Soroban smart contract |
 | Circuit | circuits/invoice_batch |
-| Network | Stellar localnet in Google Cloud Shell |
+| Network | Stellar public testnet + localnet evidence |
 | Contract ID | CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I |
 | Proof size | 14,592 bytes |
 | Public inputs | 128 bytes |
@@ -64,7 +64,7 @@ transaction simulation failed: HostError: Error(Contract, #4)
 
 ## Honest scope notes
 
-- Executed on Stellar localnet, not public testnet or mainnet.
+- Executed on Stellar public testnet for `invoice_batch` and `batchguard_rollup`, with earlier localnet evidence retained. Not mainnet.
 - Evidence is labeled LOCAL.
 - The batch commitment is a field-arithmetic weighted sum. It is demo-suitable, not production collision-resistant. A production version should use a ZK-friendly hash such as Poseidon or Pedersen.
 - No recursion, no true proof aggregation, no cross-chain bridge, and no full shielded wallet are claimed.
@@ -117,7 +117,8 @@ Evidence:
 |---|---|
 | Multi-batch settlement proof | ROADMAP_ONLY unless implemented in circuits/batchguard_rollup |
 | Production hash commitment | ROADMAP_ONLY |
-| Testnet/mainnet deployment | ROADMAP_ONLY |
+| Public Stellar testnet deployment | IMPLEMENTED_AND_TESTED |
+| Mainnet deployment | ROADMAP_ONLY |
 | Auditor selective disclosure | ROADMAP_ONLY |
 
 ## Reproduce locally
@@ -140,3 +141,21 @@ DATASET_DIR defaults to circuits/invoice_batch/target, so deploy and verify use 
 ## Live UI
 
 BatchGuard Settlement Console: https://faadil1.github.io/batchguard-zk-stellar/
+
+
+## Public Stellar testnet evidence
+
+Gate 5 adds public Stellar testnet verification for both BatchGuard proof paths:
+
+- `invoice_batch` contract ID: `CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3`
+- `batchguard_rollup` contract ID: `CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW`
+- Valid proofs were accepted by Soroban public testnet.
+- Tampered proofs were rejected during Soroban public testnet simulation with `HostError: Error(Contract, #4)`.
+- This is public testnet evidence, not mainnet and not production readiness.
+
+Evidence files:
+
+- `evidence/gate-5-testnet/invoice-batch-testnet-result.yaml`
+- `evidence/gate-5-testnet/invoice-batch-testnet.log`
+- `evidence/gate-5-testnet/rollup-testnet-result.yaml`
+- `evidence/gate-5-testnet/rollup-testnet.log`

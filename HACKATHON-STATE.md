@@ -47,8 +47,34 @@ PASS / LOCAL.
 
 - Additive circuit: circuits/batchguard_rollup.
 - One proof covers two private invoice batches.
-- Valid rollup proof accepted by Soroban localnet.
+- Valid rollup proof accepted by Soroban localnet and public Stellar testnet.
 - Tampered rollup proof rejected by the same Soroban contract.
 - Contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY.
 - Framing: aggregation-inspired multi-batch proof.
 - Not claimed: recursive proof aggregation, zkRollup, production rollup, full shielded wallet.
+
+
+## Gate 5 — Public Stellar testnet
+
+Status: PASS_TESTNET
+
+Evidence commits:
+- `61f0df9` — Add invoice batch public testnet evidence
+- `0fb296b` — Add rollup public testnet evidence
+
+Results:
+- `invoice_batch` deployed to Stellar public testnet.
+- `invoice_batch` valid proof accepted on Stellar public testnet.
+- `invoice_batch` tampered proof rejected during Soroban testnet simulation with `HostError: Error(Contract, #4)`.
+- `batchguard_rollup` deployed to Stellar public testnet.
+- `batchguard_rollup` valid proof accepted on Stellar public testnet.
+- `batchguard_rollup` tampered proof rejected during Soroban testnet simulation with `HostError: Error(Contract, #4)`.
+
+Contract IDs:
+- `invoice_batch`: `CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3`
+- `batchguard_rollup`: `CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW`
+
+Scope:
+- Public Stellar testnet evidence, not mainnet.
+- Hackathon proof-of-concept, not production readiness.
+- BatchGuard Rollup is aggregation-inspired multi-batch verification, not recursive proof aggregation and not a zkRollup.

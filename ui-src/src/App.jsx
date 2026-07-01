@@ -395,7 +395,7 @@ function VisibilityCard({ revealWitness, activeProfile }) {
     ['Batch commitment', '5,042,103,274'],
     ['ZK proof', '14,592 B'],
     ['Public inputs', '128 B'],
-    ['Contract ID', 'CAEQ…4KI3I'],
+    ['Contract ID', 'CDK5…6FG3'],
     ['Verification result', 'PASS / FAIL'],
   ];
 
@@ -406,7 +406,7 @@ function VisibilityCard({ revealWitness, activeProfile }) {
     ['Rollup commitment', '4,799,043,355,065,008'],
     ['ZK proof', '14,592 B'],
     ['Public inputs', '128 B'],
-    ['Contract ID', 'CDHT…5NBY'],
+    ['Contract ID', 'CDAK…WDCW'],
     ['Verification result', 'PASS / FAIL'],
   ];
 

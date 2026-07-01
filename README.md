@@ -1,77 +1,97 @@
-# BatchGuard ZK — Private Invoice Settlement Gate on Stellar
+# BatchGuard ZK — Private Settlement Gate for Real-World Invoices on Stellar
 
-BatchGuard ZK proves that a private batch of invoices satisfies payment policy rules without revealing invoice amounts or vendor risk scores, then verifies that proof with a Stellar Soroban smart contract.
+Stellar is a settlement network for financial institutions and tokenized assets. BatchGuard ZK is a private settlement gate: it lets a business prove that a hidden batch of real-world invoices satisfies payment-policy rules without revealing invoice amounts or vendor risk scores, and a Stellar Soroban smart contract accepts or rejects settlement based only on the proof.
+
+No invoice data touches the chain. Only the proof, public policy parameters, and a public batch commitment do.
+
+## Why this matters for real-world assets
+
+Invoices are real-world financial obligations. When they are tokenized or settled on Stellar, settlement decisions often require either full disclosure or trusted off-chain checks. BatchGuard replaces that trust assumption with a ZK proof verified by Soroban.
 
 ## Challenge fit
 
-Primary fit: Spicy — Private RWA settlement.
+Primary: Spicy — Private RWA Settlement.
 
-Secondary fit: Medium — Confidential payroll or invoicing.
+Invoices are receivables. Proving a private invoice batch satisfies policy before Stellar settlement is a direct real-world asset use case: private, verifiable, and chain-enforced.
 
-Invoices are real-world financial obligations. BatchGuard shows how a private invoice batch can be checked against public payment rules before settlement, without exposing sensitive business data.
+Secondary: Medium — Confidential Payroll / Invoicing.
 
-## What it proves
+The same pattern applies to any private batch of financial obligations with threshold constraints.
 
-For a private batch of 4 invoices, BatchGuard proves:
+## What the proof guarantees
 
-- each invoice is below a public per-invoice approval limit;
-- total batch exposure is below a public batch limit;
-- each vendor risk score is below a public risk threshold;
-- the hidden batch matches a public commitment;
-- invoice amounts and vendor risk scores remain private.
+For a private batch of 4 invoices, the Noir circuit proves that:
 
-## Public policy used in the demo
+1. Every invoice is below a public per-invoice approval ceiling.
+2. The total batch exposure is below a public batch limit.
+3. Every vendor risk score is below a public risk threshold.
+4. The private batch matches a public commitment.
 
-- per_invoice_limit: 2500
-- batch_total_limit: 7000
-- max_vendor_risk: 5
-- batch_commitment: 5042103274
+The policy parameters are public inputs. The invoice amounts and vendor risk scores are private witnesses.
 
-## Technical result
+## Demo policy
 
-Executed locally in Google Cloud Shell against Stellar localnet.
+| Parameter | Value |
+|---|---:|
+| per_invoice_limit | 2500 |
+| batch_total_limit | 7000 |
+| max_vendor_risk | 5 |
+| batch_commitment | 5042103274 |
 
-- ZK stack: Noir + UltraHonk / Barretenberg
-- Verifier: Stellar Soroban smart contract
-- Product circuit: circuits/invoice_batch
-- Contract ID: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
-- Proof size: 14,592 bytes
-- Public inputs size: 128 bytes
-- CPU instructions: 78,110,594
-- Min resource fee: 881756 stroops
+## Technical stack
 
-## Evidence
+| Component | Value |
+|---|---|
+| ZK system | Noir + UltraHonk / Barretenberg |
+| On-chain verifier | Stellar Soroban smart contract |
+| Circuit | circuits/invoice_batch |
+| Network | Stellar localnet in Google Cloud Shell |
+| Contract ID | CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I |
+| Proof size | 14,592 bytes |
+| Public inputs | 128 bytes |
+| CPU instructions | 78,110,594 |
+| Min resource fee | 881,756 stroops |
 
-Valid BatchGuard proof accepted on-chain:
+## Proven result
+
+Valid invoice_batch proof accepted by Soroban:
 
 Proof successfully verified on-chain!
 
-Tampered BatchGuard proof rejected by the same contract:
+Tampered invoice_batch proof rejected by the same contract:
 
 transaction simulation failed: HostError: Error(Contract, #4)
 
-Evidence files:
+## Honest scope notes
 
-- evidence/TECHNICAL-PROOF-SUMMARY.md
-- evidence/gate-1-final-result.yaml
-- evidence/gate-2-final-result.yaml
-- evidence/gate-3-final-result.yaml
-- evidence/gate3-valid-invoice-batch-onchain.log
-- evidence/gate3-invalid-invoice-batch-onchain.log
-- evidence/artifacts/invoice_batch/
-- evidence/artifacts/contracts/rs_soroban_ultrahonk.wasm
+- Executed on Stellar localnet, not public testnet or mainnet.
+- Evidence is labeled LOCAL.
+- The batch commitment is a field-arithmetic weighted sum. It is demo-suitable, not production collision-resistant. A production version should use a ZK-friendly hash such as Poseidon or Pedersen.
+- No recursion, no true proof aggregation, no cross-chain bridge, and no full shielded wallet are claimed.
 
-## Run locally
+## Evidence files
 
-Required tools:
+| File | Contents |
+|---|---|
+| evidence/TECHNICAL-PROOF-SUMMARY.md | High-level proof summary |
+| evidence/gate-2-final-result.yaml | Circuit proof generation and invalid witness rejection |
+| evidence/gate-3-final-result.yaml | Soroban verification summary |
+| evidence/gate3-valid-invoice-batch-onchain.log | Valid proof accepted |
+| evidence/gate3-invalid-invoice-batch-onchain.log | Tampered proof rejected |
+| evidence/artifacts/invoice_batch/ | proof, vk, public inputs, generated fields |
 
-- Stellar CLI
-- Rust / Cargo
-- Noir nargo
-- Barretenberg bb
-- Docker
-- Node.js / npm
-- just
+## Wild roadmap
+
+| Feature | Status |
+|---|---|
+| Multi-batch settlement proof | ROADMAP_ONLY unless implemented in circuits/batchguard_rollup |
+| Production hash commitment | ROADMAP_ONLY |
+| Testnet/mainnet deployment | ROADMAP_ONLY |
+| Auditor selective disclosure | ROADMAP_ONLY |
+
+## Reproduce locally
+
+Requirements: Stellar CLI, Rust/Cargo, Noir nargo, Barretenberg bb, Docker, Node.js/npm, just.
 
 Run:
 
@@ -83,8 +103,4 @@ Run:
 6. just deploy
 7. just verify "$(cat .contract_id)"
 
-The project defaults DATASET_DIR to circuits/invoice_batch/target, so deploy and verify use the BatchGuard circuit artifacts.
-
-## Scope note
-
-This is a hackathon proof-of-concept, not production audit software. It demonstrates the core real-world ZK path: private invoice batch policy proof verified by a Stellar Soroban smart contract.
+DATASET_DIR defaults to circuits/invoice_batch/target, so deploy and verify use the BatchGuard circuit artifacts automatically.

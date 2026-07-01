@@ -6,7 +6,13 @@ SUBMITTED_READY / TECHNICAL_CORE_FROZEN
 
 ## Product
 
-BatchGuard ZK — Private Invoice Settlement Gate on Stellar.
+BatchGuard ZK — Private Settlement Gate for Real-World Invoices on Stellar.
+
+## Current positioning
+
+Primary: Spicy — Private RWA Settlement.
+
+Secondary: Medium — Confidential Payroll / Invoicing.
 
 ## Core proof
 
@@ -16,23 +22,15 @@ BatchGuard proves that a private batch of 4 invoices satisfies public payment po
 
 ### Gate 1 — Soroban ZK verifier spike
 
-PASS / LOCAL
-
-- UltraHonk proof accepted by Stellar Soroban localnet.
-- Tampered proof rejected by the same contract.
+PASS / LOCAL.
 
 ### Gate 2 — Product circuit
 
-PASS / LOCAL
-
-- Circuit: invoice_batch.
-- Valid batch proof generated.
-- Noir test passed.
-- Invalid invoice amount rejected during witness/proof generation.
+PASS / LOCAL.
 
 ### Gate 3 — Product proof on Soroban
 
-PASS / LOCAL
+PASS / LOCAL.
 
 - Contract ID: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I.
 - Valid BatchGuard proof accepted on-chain.
@@ -40,4 +38,4 @@ PASS / LOCAL
 
 ## Freeze rule
 
-The technical proof core is frozen. Only README, evidence packaging, demo script, and submission materials should be changed unless a blocking issue is found.
+The invoice_batch technical proof core is frozen. Any Wild upgrade must be additive and must not modify the proven core.

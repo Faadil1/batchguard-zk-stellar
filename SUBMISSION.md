@@ -1,35 +1,45 @@
-# BatchGuard ZK — Submission Summary
+# BatchGuard ZK — Submission
 
-BatchGuard ZK is a private invoice settlement gate for Stellar.
+## Project in one sentence
 
-It lets a business prove that a hidden batch of invoices satisfies payment policy before settlement, without revealing individual invoice amounts or vendor risk scores.
+BatchGuard ZK is a private settlement gate for real-world invoices on Stellar: a Soroban smart contract enforces payment policy by verifying a ZK proof, not by reading invoice amounts.
 
 ## Challenge fit
 
-Primary inspiration category: Spicy — Private RWA settlement.
+Primary: Spicy — Private RWA Settlement.
 
-Secondary inspiration category: Medium — Confidential payroll or invoicing.
+Invoices are real-world financial obligations. BatchGuard shows how they can be settled or approved on Stellar without revealing amounts on-chain.
 
-Invoices are real-world financial obligations. BatchGuard shows how a private invoice batch can be checked against public payment rules before settlement.
+Secondary: Medium — Confidential Payroll / Invoicing.
 
-## Demo result
+## What is proven
 
-- Product circuit: invoice_batch
-- Valid proof: accepted on Stellar Soroban localnet
-- Tampered proof: rejected by the same contract
+A private batch of 4 invoices satisfies payment policy rules — per-invoice ceiling, batch total cap, and vendor risk threshold — and matches a public commitment, without the Soroban contract or any on-chain observer seeing the invoice amounts.
+
+## Technical result
+
+| Claim | Status | Evidence |
+|---|---|---|
+| Noir circuit compiles and test passes | IMPLEMENTED_AND_TESTED | evidence/gate-2-final-result.yaml |
+| Invalid witness rejected at circuit level | IMPLEMENTED_AND_TESTED | evidence/gate-2-final-result.yaml |
+| Soroban verifier deployed on localnet | LOCAL_ONLY | evidence/gate-3-final-result.yaml |
+| Valid proof accepted by Soroban | LOCAL_ONLY | evidence/gate3-valid-invoice-batch-onchain.log |
+| Tampered proof rejected by Soroban | LOCAL_ONLY | evidence/gate3-invalid-invoice-batch-onchain.log |
+| Public testnet or mainnet deployment | ROADMAP_ONLY | — |
+| Recursive or aggregated proofs | ROADMAP_ONLY | — |
+
+## Public inputs
+
+- per_invoice_limit: 2500
+- batch_total_limit: 7000
+- max_vendor_risk: 5
+- batch_commitment: 5042103274
 - Contract ID: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
 
-## Public policy
+## Honest scope
 
-- Per-invoice limit: 2500
-- Batch total limit: 7000
-- Max vendor risk: 5
-- Batch commitment: 5042103274
+BatchGuard is a hackathon proof-of-concept. The commitment scheme, deployment environment, and batch size are demo-appropriate. The core technical claim is real: a Stellar Soroban contract verifies a Noir UltraHonk proof that a private invoice batch satisfies payment policy.
 
-## Scope note
+## Wild extension path
 
-The prototype does not claim to be a full shielded payment system. It proves the core settlement gate: a Stellar Soroban contract verifies a ZK proof that a hidden invoice batch satisfies policy.
-
-## Evidence
-
-See evidence/TECHNICAL-PROOF-SUMMARY.md.
+The next additive upgrade is BatchGuard Rollup: an aggregation-inspired multi-batch circuit where one proof covers two private invoice batches. This is not claimed unless implemented and tested.

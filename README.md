@@ -46,7 +46,9 @@ The policy parameters are public inputs. The invoice amounts and vendor risk sco
 | On-chain verifier | Stellar Soroban smart contract |
 | Circuit | circuits/invoice_batch |
 | Network | Stellar public testnet + localnet evidence |
-| Contract ID | CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I |
+| Contract ID (localnet invoice_batch) | CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I |
+| Contract ID (testnet invoice_batch) | CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3 |
+| Contract ID (testnet batchguard_rollup) | CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW |
 | Proof size | 14,592 bytes |
 | Public inputs | 128 bytes |
 | CPU instructions | 78,110,594 |
@@ -65,7 +67,7 @@ transaction simulation failed: HostError: Error(Contract, #4)
 ## Honest scope notes
 
 - Executed on Stellar public testnet for `invoice_batch` and `batchguard_rollup`, with earlier localnet evidence retained. Not mainnet.
-- Evidence is labeled LOCAL.
+- Evidence is labeled LOCAL for Gates 2-4 and PASS_TESTNET / TESTNET_VERIFIED for Gate 5.
 - The batch commitment is a field-arithmetic weighted sum. It is demo-suitable, not production collision-resistant. A production version should use a ZK-friendly hash such as Poseidon or Pedersen.
 - No recursion, no true proof aggregation, no cross-chain bridge, and no full shielded wallet are claimed.
 
@@ -97,9 +99,10 @@ Gate 4 result:
 | valid rollup proof accepted by Soroban | PASS / LOCAL |
 | tampered rollup proof rejected by Soroban | PASS / LOCAL |
 
-Rollup contract ID:
+Rollup contract IDs:
 
-CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+- Localnet: `CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY`
+- Public testnet: `CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW`
 
 Evidence:
 

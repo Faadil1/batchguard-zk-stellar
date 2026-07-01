@@ -60,9 +60,9 @@ Implemented result:
 - Invalid rollup witness rejected during proof generation
 - Valid rollup proof accepted by Stellar Soroban public testnet
 - Tampered rollup proof rejected by the same Soroban contract
-- Rollup contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+- Rollup contract ID: CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW
 
-Evidence: evidence/gate-4-rollup-result.yaml
+Evidence: evidence/gate-5-testnet/rollup-testnet-result.yaml
 
 
 ## Live UI

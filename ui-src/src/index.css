@@ -582,6 +582,230 @@ body::before {
 }
 .rollup-proof-size { font-size: 11px; color: var(--text-2); }
 
+/* ─── Command Center ─── */
+.command-center {
+  margin-top: 32px;
+}
+.command-center-header {
+  margin-bottom: 24px;
+}
+.command-center-badge {
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(0,229,160,0.2);
+  border-radius: 100px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+.command-center-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-1);
+  margin-bottom: 8px;
+}
+.command-center-sub {
+  font-size: 13px;
+  color: var(--text-2);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.control-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s var(--ease-out);
+}
+.control-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--border-hi);
+  color: var(--text-1);
+}
+.control-btn.active {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--text-1);
+  box-shadow: 0 0 12px var(--accent-dim);
+}
+
+.control-btn.btn-valid.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-dim);
+}
+.control-btn.btn-tampered.active {
+  border-color: var(--reject);
+  box-shadow: 0 0 12px var(--reject-dim);
+}
+
+.btn-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-3);
+  display: inline-block;
+  transition: all 0.2s;
+}
+.control-btn.active .btn-indicator {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+.control-btn.active .btn-indicator.dot-green {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+.control-btn.active .btn-indicator.dot-red {
+  background: var(--reject);
+  box-shadow: 0 0 6px var(--reject);
+}
+
+.replay-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 11px;
+}
+.status-label-indicator {
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+.status-value-text {
+  color: var(--text-2);
+}
+
+/* ─── Profile active/inactive styling ─── */
+.profile-active {
+  opacity: 1;
+  transition: all 0.4s var(--ease-out);
+}
+.profile-inactive {
+  opacity: 0.15;
+  pointer-events: none;
+  filter: grayscale(80%) blur(0.5px);
+  transition: all 0.4s var(--ease-out);
+}
+
+/* ─── Flow strip dynamics ─── */
+.flow-strip.flow-valid .flow-step {
+  border-color: var(--accent-glow);
+}
+.flow-strip.flow-valid .flow-step-num {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+.flow-strip.flow-tampered .flow-step {
+  border-color: var(--border);
+}
+.flow-strip.flow-tampered .flow-step.gate-rejected {
+  border-color: var(--reject);
+  box-shadow: 0 0 12px var(--reject-dim);
+}
+.flow-strip.flow-tampered .flow-step.gate-rejected .flow-step-num {
+  color: var(--reject);
+  text-shadow: 0 0 8px var(--reject-dim);
+}
+
+/* ─── Gate alerts and active card styling ─── */
+.gate-blocked-alert {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--reject-dim);
+  border: 1px solid rgba(255, 69, 69, 0.3);
+  border-radius: 4px;
+  color: var(--reject);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  animation: pulse-reject 2s infinite ease-in-out;
+}
+@keyframes pulse-reject {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.card-shell.active-card {
+  transition: all 0.4s var(--ease-out);
+}
+.card-shell.active-card.card-valid {
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(0, 229, 160, 0.1);
+}
+.card-shell.active-card.card-tampered {
+  border-color: var(--reject);
+  box-shadow: 0 0 16px rgba(255, 69, 69, 0.1);
+}
+
+.demo-preview-banner {
+  padding: 8px 12px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 10px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.split-row-clear {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+
 /* ─── Animations ─── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }

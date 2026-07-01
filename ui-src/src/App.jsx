@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 // BatchGuard Settlement Console
 // All data sourced from real evidence files:
 //   evidence/gate-3-final-result.yaml   -> invoice_batch proof
@@ -52,7 +54,7 @@ function NavBar() {
 
 function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" style={{ paddingBottom: '32px' }}>
       <div className="hero-eyebrow">
         <span className="hero-eyebrow-dot"/>
         Stellar Hacks: Real-World ZK · Spicy Track — Private RWA Settlement
@@ -73,40 +75,151 @@ function Hero() {
         <span className="hero-pill"><span className="hero-pill-icon">◉</span> Real-World ZK</span>
         <span className="hero-pill"><span className="hero-pill-icon">☁</span> Localnet proven</span>
       </div>
+    </section>
+  );
+}
 
-      <div className="flow-strip">
-        <div className="flow-step">
-          <div className="flow-step-num">1</div>
-          <div className="flow-step-title">Private batch</div>
-          <div className="flow-step-body">4 invoices with amounts and vendor risk scores — never touch the chain</div>
+function CommandCenter({ activeProfile, setActiveProfile, replayMode, setReplayMode, revealWitness, setRevealWitness }) {
+  return (
+    <section className="command-center card-shell anim-0" style={{ marginBottom: '32px' }}>
+      <div className="card-inner">
+        <div className="command-center-header">
+          <div className="command-center-badge">Simulation Console</div>
+          <h2 className="command-center-title">Evidence Replay Command Center</h2>
+          <p className="command-center-sub">
+            Replay the recorded localnet proof outcomes: a valid private batch is accepted by the Soroban verifier, while a tampered proof is rejected.
+          </p>
         </div>
-        <div className="flow-arrow">→</div>
-        <div className="flow-step">
-          <div className="flow-step-num">2</div>
-          <div className="flow-step-title">ZK proof</div>
-          <div className="flow-step-body">Noir circuit proves the batch satisfies policy rules without revealing data</div>
+
+        <div className="controls-grid">
+          {/* Active Profile Selection */}
+          <div className="control-group">
+            <label className="control-label">Active Profile</label>
+            <div className="control-buttons">
+              <button 
+                className={`control-btn ${activeProfile === 'single' ? 'active' : ''}`}
+                onClick={() => setActiveProfile('single')}
+              >
+                <span className="btn-indicator"></span>
+                Single Batch Gate
+              </button>
+              <button 
+                className={`control-btn ${activeProfile === 'rollup' ? 'active' : ''}`}
+                onClick={() => setActiveProfile('rollup')}
+              >
+                <span className="btn-indicator"></span>
+                BatchGuard Rollup
+              </button>
+            </div>
+          </div>
+
+          {/* Replay Mode Selection */}
+          <div className="control-group">
+            <label className="control-label">Replay Mode</label>
+            <div className="control-buttons">
+              <button 
+                className={`control-btn btn-valid ${replayMode === 'valid' ? 'active' : ''}`}
+                onClick={() => setReplayMode('valid')}
+              >
+                <span className="btn-indicator dot-green"></span>
+                Replay Valid Proof
+              </button>
+              <button 
+                className={`control-btn btn-tampered ${replayMode === 'tampered' ? 'active' : ''}`}
+                onClick={() => setReplayMode('tampered')}
+              >
+                <span className="btn-indicator dot-red"></span>
+                Replay Tampered Proof
+              </button>
+            </div>
+          </div>
+
+          {/* Witness Visibility Selection */}
+          <div className="control-group">
+            <label className="control-label">Witness Visibility</label>
+            <div className="control-buttons">
+              <button 
+                className={`control-btn ${!revealWitness ? 'active' : ''}`}
+                onClick={() => setRevealWitness(false)}
+              >
+                Hide private witness
+              </button>
+              <button 
+                className={`control-btn ${revealWitness ? 'active' : ''}`}
+                onClick={() => setRevealWitness(true)}
+              >
+                Reveal demo witness
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flow-arrow">→</div>
-        <div className="flow-step">
-          <div className="flow-step-num">3</div>
-          <div className="flow-step-title">Soroban gate</div>
-          <div className="flow-step-body">Smart contract verifies the proof on-chain — accept or reject settlement</div>
+
+        <div className="replay-status-bar">
+          <span className="status-label-indicator">Status:</span>
+          <span className="status-value-text">
+            Static replay of recorded evidence · Localnet state simulated
+          </span>
         </div>
       </div>
     </section>
   );
 }
 
-function SingleBatchCard() {
+function FlowStrip({ replayMode, activeProfile }) {
+  const isRollup = activeProfile === 'rollup';
+  const isValid = replayMode === 'valid';
+
   return (
-    <div className="card-shell anim-1">
+    <div className={`flow-strip ${isValid ? 'flow-valid' : 'flow-tampered'}`} style={{ marginBottom: '40px' }}>
+      <div className="flow-step">
+        <div className="flow-step-num">1</div>
+        <div className="flow-step-title">{isRollup ? '2 Private Batches' : 'Private Batch'}</div>
+        <div className="flow-step-body">
+          {isRollup 
+            ? '8 invoices with amounts and risk scores — hidden from chain'
+            : '4 invoices with amounts and risk scores — hidden from chain'}
+        </div>
+      </div>
+      <div className="flow-arrow">→</div>
+      <div className="flow-step">
+        <div className="flow-step-num">2</div>
+        <div className="flow-step-title">{isRollup ? 'Rollup Proof' : 'ZK Proof'}</div>
+        <div className="flow-step-body">
+          {isRollup
+            ? 'Noir circuit aggregates two batches into a single UltraHonk proof'
+            : 'Noir circuit proves batch policy constraints satisfied without data exposure'}
+        </div>
+      </div>
+      <div className="flow-arrow">→</div>
+      <div className={`flow-step step-gate ${isValid ? 'gate-accepted' : 'gate-rejected'}`}>
+        <div className="flow-step-num">3</div>
+        <div className="flow-step-title">
+          {isValid ? 'Settlement Gate Open' : 'Settlement Blocked'}
+        </div>
+        <div className="flow-step-body">
+          {isValid 
+            ? 'Soroban localnet verifier accepted and verified the proof'
+            : 'Soroban localnet verifier rejected the proof (tamper detected)'}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SingleBatchCard({ replayMode }) {
+  const isValid = replayMode === 'valid';
+
+  return (
+    <div className={`card-shell anim-1 active-card ${isValid ? 'card-valid' : 'card-tampered'}`}>
       <div className="card-inner">
         <div className="proof-card-header">
           <div>
             <div className="proof-card-title">Single Batch Proof</div>
             <div className="proof-card-sub">4 invoices · 3 policy rules · 1 Soroban call</div>
           </div>
-          <span className="status-badge pass">Verified on Soroban</span>
+          <span className={`status-badge ${isValid ? 'pass' : 'rejected'}`}>
+            {isValid ? 'Soroban localnet verifier accepted' : 'Soroban localnet verifier rejected'}
+          </span>
         </div>
 
         <div className="policy-grid">
@@ -123,31 +236,34 @@ function SingleBatchCard() {
           ))}
         </div>
 
-        <div className="proof-result">
-          <div className="proof-result-header">
-            <span className="proof-result-title">Valid proof submitted</span>
-            <span className="evidence-label">LOCAL_ONLY</span>
+        {isValid ? (
+          <div className="proof-result active-result">
+            <div className="proof-result-header">
+              <span className="proof-result-title">Replay: Valid proof outcome</span>
+              <span className="evidence-label">LOCAL_ONLY</span>
+            </div>
+            <div className="proof-result-body accepted">
+              ✓ ACCEPTED — Proof successfully verified on Soroban localnet
+              <div className="mono-sm">tx: {SINGLE.txHash}</div>
+            </div>
           </div>
-          <div className="proof-result-body accepted">
-            ✓ Proof successfully verified on-chain!
-            <div className="mono-sm">tx: {SINGLE.txHash}</div>
+        ) : (
+          <div className="proof-result active-result">
+            <div className="proof-result-header">
+              <span className="proof-result-title">Replay: Tampered proof outcome</span>
+              <span className="evidence-label">LOCAL_ONLY</span>
+            </div>
+            <div className="proof-result-body rejected-txt">
+              ✗ REJECTED — HostError: Error(Contract, #4)
+              <div className="mono-sm">Tamper type: proof byte altered / SHA-256 mismatch confirmed</div>
+              <div className="gate-blocked-alert">Settlement blocked</div>
+            </div>
           </div>
-        </div>
-
-        <div className="proof-result">
-          <div className="proof-result-header">
-            <span className="proof-result-title">Tampered proof submitted</span>
-            <span className="evidence-label">LOCAL_ONLY</span>
-          </div>
-          <div className="proof-result-body rejected-txt">
-            ✗ HostError: Error(Contract, #4) — rejected
-            <div className="mono-sm">tamper: first byte XOR 0xFF · sha256 mismatch confirmed</div>
-          </div>
-        </div>
+        )}
 
         <div className="divider"/>
         <div className="contract-strip">
-          <span className="contract-strip-label">Contract</span>
+          <span className="contract-strip-label">Contract ID</span>
           <span className="contract-id">{SINGLE.contractId}</span>
         </div>
 
@@ -170,16 +286,20 @@ function SingleBatchCard() {
   );
 }
 
-function RollupCard() {
+function RollupCard({ replayMode }) {
+  const isValid = replayMode === 'valid';
+
   return (
-    <div className="card-shell anim-2">
+    <div className={`card-shell anim-2 active-card ${isValid ? 'card-valid' : 'card-tampered'}`}>
       <div className="card-inner">
         <div className="proof-card-header">
           <div>
             <div className="proof-card-title">Rollup Proof</div>
             <div className="proof-card-sub">8 invoices · 2 batches · 1 Soroban call</div>
           </div>
-          <span className="status-badge pass">Verified on Soroban</span>
+          <span className={`status-badge ${isValid ? 'pass' : 'rejected'}`}>
+            {isValid ? 'Soroban localnet verifier accepted' : 'Soroban localnet verifier rejected'}
+          </span>
         </div>
 
         <div className="rollup-visual">
@@ -200,30 +320,34 @@ function RollupCard() {
           </div>
         </div>
 
-        <div className="proof-result">
-          <div className="proof-result-header">
-            <span className="proof-result-title">Valid rollup proof submitted</span>
-            <span className="evidence-label">LOCAL_ONLY</span>
+        {isValid ? (
+          <div className="proof-result active-result">
+            <div className="proof-result-header">
+              <span className="proof-result-title">Replay: Valid rollup proof outcome</span>
+              <span className="evidence-label">LOCAL_ONLY</span>
+            </div>
+            <div className="proof-result-body accepted">
+              ✓ ACCEPTED — Proof successfully verified on Soroban localnet
+              <div className="mono-sm">tx: {ROLLUP.txHash}</div>
+            </div>
           </div>
-          <div className="proof-result-body accepted">
-            ✓ Proof successfully verified on-chain!
-            <div className="mono-sm">tx: {ROLLUP.txHash}</div>
+        ) : (
+          <div className="proof-result active-result">
+            <div className="proof-result-header">
+              <span className="proof-result-title">Replay: Tampered rollup proof outcome</span>
+              <span className="evidence-label">LOCAL_ONLY</span>
+            </div>
+            <div className="proof-result-body rejected-txt">
+              ✗ REJECTED — HostError: Error(Contract, #4)
+              <div className="mono-sm">Tamper type: proof byte altered / SHA-256 mismatch confirmed</div>
+              <div className="gate-blocked-alert">Settlement blocked</div>
+            </div>
           </div>
-        </div>
-
-        <div className="proof-result">
-          <div className="proof-result-header">
-            <span className="proof-result-title">Tampered rollup proof submitted</span>
-            <span className="evidence-label">LOCAL_ONLY</span>
-          </div>
-          <div className="proof-result-body rejected-txt">
-            ✗ HostError: Error(Contract, #4) — rejected
-          </div>
-        </div>
+        )}
 
         <div className="divider"/>
         <div className="contract-strip">
-          <span className="contract-strip-label">Contract</span>
+          <span className="contract-strip-label">Contract ID</span>
           <span className="contract-id">{ROLLUP.contractId}</span>
         </div>
 
@@ -239,20 +363,55 @@ function RollupCard() {
   );
 }
 
-function VisibilityCard() {
-  const priv = [
-    ['Invoice 1 amount','1,200'],['Invoice 2 amount','2,300'],
-    ['Invoice 3 amount','1,800'],['Invoice 4 amount','900'],
-    ['Vendor 1 risk score','2/10'],['Vendor 2 risk score','3/10'],
-    ['Vendor 3 risk score','1/10'],['Vendor 4 risk score','2/10'],
-    ['Batch nonce','42'],
+function VisibilityCard({ revealWitness, activeProfile }) {
+  const isRollup = activeProfile === 'rollup';
+  
+  const privSingle = [
+    ['Invoice 1 amount', '1,200'],
+    ['Invoice 2 amount', '2,300'],
+    ['Invoice 3 amount', '1,800'],
+    ['Invoice 4 amount', '900'],
+    ['Vendor 1 risk score', '2/10'],
+    ['Vendor 2 risk score', '3/10'],
+    ['Vendor 3 risk score', '1/10'],
+    ['Vendor 4 risk score', '2/10'],
+    ['Batch nonce', '42'],
   ];
-  const pub = [
-    ['Per-invoice limit','2,500'],['Batch total cap','7,000'],
-    ['Max vendor risk','5'],['Batch commitment','5,042,103,274'],
-    ['ZK proof','14,592 B'],['Public inputs','128 B'],
-    ['Contract ID','CAEQ…4KI3I'],['Verification result','PASS / FAIL'],
+
+  const privRollup = [
+    ['[Batch A] Invoice 1 amount', '1,200'],
+    ['[Batch A] Invoice 2 amount', '2,300'],
+    ['[Batch B] Invoice 1 amount', '1,500'],
+    ['[Batch B] Invoice 2 amount', '1,900'],
+    ['[Batch A] Max risk score', '3/10'],
+    ['[Batch B] Max risk score', '4/10'],
+    ['Rollup batch nonce', '99'],
   ];
+
+  const pubSingle = [
+    ['Per-invoice limit', '2,500'],
+    ['Batch total cap', '7,000'],
+    ['Max vendor risk', '5'],
+    ['Batch commitment', '5,042,103,274'],
+    ['ZK proof', '14,592 B'],
+    ['Public inputs', '128 B'],
+    ['Contract ID', 'CAEQ…4KI3I'],
+    ['Verification result', 'PASS / FAIL'],
+  ];
+
+  const pubRollup = [
+    ['Per-invoice limit', '2,500'],
+    ['Batch total cap', '7,000'],
+    ['Max vendor risk', '5'],
+    ['Rollup commitment', '4,799,043,355,065,008'],
+    ['ZK proof', '14,592 B'],
+    ['Public inputs', '128 B'],
+    ['Contract ID', 'CDHT…5NBY'],
+    ['Verification result', 'PASS / FAIL'],
+  ];
+
+  const priv = isRollup ? privRollup : privSingle;
+  const pub = isRollup ? pubRollup : pubSingle;
 
   return (
     <div className="card-shell bento-span anim-3" id="visibility">
@@ -262,29 +421,37 @@ function VisibilityCard() {
             <div className="proof-card-title">Settlement Visibility</div>
             <div className="proof-card-sub">What the chain sees vs. what stays in the ZK circuit</div>
           </div>
-          <span className="evidence-label">Invoice Batch · Localnet</span>
+          <span className="evidence-label">{isRollup ? 'BatchGuard Rollup' : 'Single Batch'} · Localnet</span>
         </div>
 
         <div className="split-grid">
           <div>
             <div className="split-col-header">
-              <span className="status-badge rejected">Private</span>
-              <span className="split-col-title">Inside the ZK circuit only</span>
+              <span className="status-badge rejected">Private witness — hidden from chain</span>
             </div>
-            {priv.map(([label, blurred], i) => (
+            {revealWitness ? (
+              <div className="demo-preview-banner">
+                Demo witness preview — not sent on-chain
+              </div>
+            ) : null}
+            {priv.map(([label, value], i) => (
               <div className="split-row" key={i}>
                 <span className="split-icon">🔒</span>
                 <span className="split-row-text">{label}</span>
-                <span className="split-row-blurred">{blurred}</span>
+                {revealWitness ? (
+                  <span className="split-row-clear">{value}</span>
+                ) : (
+                  <span className="split-row-blurred">••••••</span>
+                )}
                 <span className="private-tag">hidden</span>
               </div>
             ))}
           </div>
           <div>
             <div className="split-col-header">
-              <span className="status-badge pass">Public</span>
-              <span className="split-col-title">On Stellar / Soroban</span>
+              <span className="status-badge pass">Public verifier inputs — visible to Soroban</span>
             </div>
+            <div style={{height: revealWitness ? '32px' : '0px', transition: 'height 0.2s'}} />
             {pub.map(([label, value], i) => (
               <div className="split-row" key={i}>
                 <span className="split-icon">◎</span>
@@ -421,12 +588,26 @@ function Footer() {
 }
 
 export default function App() {
+  const [activeProfile, setActiveProfile] = useState('single');
+  const [replayMode, setReplayMode] = useState('valid');
+  const [revealWitness, setRevealWitness] = useState(false);
+
   return (
     <>
       <div className="bg-glow"/>
       <div className="app">
         <NavBar/>
         <Hero/>
+        <CommandCenter 
+          activeProfile={activeProfile} 
+          setActiveProfile={setActiveProfile}
+          replayMode={replayMode}
+          setReplayMode={setReplayMode}
+          revealWitness={revealWitness}
+          setRevealWitness={setRevealWitness}
+        />
+        <FlowStrip replayMode={replayMode} activeProfile={activeProfile} />
+        
         <section id="proofs">
           <div className="section-label anim-0">Settlement Proofs</div>
           <p className="section-intro anim-0">
@@ -434,9 +615,13 @@ export default function App() {
             smart contract on localnet, and verified on-chain. Tampered proofs were rejected.
           </p>
           <div className="bento">
-            <VisibilityCard/>
-            <SingleBatchCard/>
-            <RollupCard/>
+            <VisibilityCard revealWitness={revealWitness} activeProfile={activeProfile} />
+            <div className={activeProfile === 'single' ? 'profile-active' : 'profile-inactive'}>
+              <SingleBatchCard replayMode={replayMode} />
+            </div>
+            <div className={activeProfile === 'rollup' ? 'profile-active' : 'profile-inactive'}>
+              <RollupCard replayMode={replayMode} />
+            </div>
           </div>
         </section>
         <TrustPanel/>

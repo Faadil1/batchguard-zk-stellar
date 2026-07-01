@@ -1,0 +1,1 @@
+PASS_TESTNET: valid proof accepted and tampered proof rejected

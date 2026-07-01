@@ -1,0 +1,26 @@
+gate: 5A
+name: invoice_batch_public_testnet_verification
+status: PASS_TESTNET
+network: stellar_public_testnet
+network_passphrase: "Test SDF Network ; September 2015"
+source_account: alice
+source_address: "GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ"
+contract_id: "CDK5EJ3N6OROZL45PYGAAJLS53DUV2CZ7MXVUTF3PEAKMPU223UT6FG3"
+circuit: circuits/invoice_batch
+contract_wasm: target/wasm32v1-none/release/rs_soroban_ultrahonk.wasm
+proof_artifacts:
+  public_inputs: circuits/invoice_batch/target/public_inputs
+  proof: circuits/invoice_batch/target/proof
+artifact_sizes:
+  public_inputs_bytes: 128
+  proof_bytes: 14592
+valid_result: accepted_by_soroban_public_testnet
+valid_submission: transaction_submitted_successfully
+tampered_result: rejected_during_soroban_public_testnet_simulation
+tamper_method: first_proof_byte_xor_0xff
+tamper_error: "HostError: Error(Contract, #4)"
+stellar_expert_tx_links_file: evidence/gate-5-testnet/invoice_batch_testnet_tx_links.txt
+evidence_log: evidence/gate-5-testnet/invoice-batch-testnet.log
+status_file: evidence/gate-5-testnet/invoice_batch_testnet_status.txt
+base_commit: "7707467"
+scope_note: "Public Stellar testnet verification for invoice_batch. This is not mainnet and not production readiness. Tampered proof rejection occurred during Soroban testnet transaction simulation before submission."

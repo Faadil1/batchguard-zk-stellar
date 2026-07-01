@@ -1,0 +1,22 @@
+./scripts/verify.sh CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+[0;34m--- Artifact Summary ---[0m
+Public Inputs : 128 bytes
+Proof         : 14592 bytes
+------------------------
+[0;34mInvoking verify_proof on contract CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY...[0m
+ℹ️  Simulating transaction…
+ℹ️  Signing transaction: e7e1cee2b8359665d21a82a5e1afddbf3366bd6fec556dba08738bdd2e0e6f91
+🌎 Sending transaction…
+✅ Transaction submitted successfully!
+null
+
+[0;32mProof successfully verified on-chain![0m
+
+[0;34mGenerating detailed performance report...[0m
+
+> ultrahonk-measure@1.0.0 measure
+> ts-node measure_ultrahonk_costs.ts --contract-id CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY --source-secret SAS4UIAOIXKUSN7R3S3LFOWIPCXQE6FQQ4D2ZOMGTTKYCG7F4D6SXRAY --dataset /home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/circuits/batchguard_rollup/target --rpc-url http://localhost:8000/soroban/rpc --network-passphrase Standalone Network ; February 2017
+
+sh: line 1: ts-node: command not found
+error: recipe `verify` failed on line 69 with exit code 127
+VALID_ROLLUP_EXIT=127

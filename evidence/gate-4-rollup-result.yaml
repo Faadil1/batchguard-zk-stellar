@@ -1,0 +1,44 @@
+gate: 4
+name: BatchGuard Rollup - aggregation-inspired multi-batch proof
+status: PASS_LOCAL
+
+claims:
+  rollup_circuit:
+    status: PASS
+    evidence:
+      - evidence/gate4-rollup-nargo-test.log
+      - evidence/gate4-rollup-build.log
+
+  invalid_witness:
+    status: PASS
+    evidence:
+      - evidence/gate4-rollup-invalid-witness.log
+
+  soroban_valid_rollup_proof:
+    status: PASS_LOCAL
+    contract_id: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+    evidence:
+      - evidence/gate4-rollup-valid-onchain-2.log
+
+  soroban_tampered_rollup_proof:
+    status: PASS_LOCAL
+    contract_id: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+    evidence:
+      - evidence/gate4-rollup-invalid-onchain.log
+
+important_note:
+  - The valid rollup proof was accepted by Soroban localnet.
+  - The tampered rollup proof was rejected by the same Soroban contract.
+  - The valid verify command exited 127 only after successful proof verification because the optional performance report step could not find ts-node.
+  - This is not a proof failure.
+
+framing:
+  allowed:
+    - aggregation-inspired multi-batch proof
+    - one proof covers two private invoice batches
+    - verified by one Soroban contract call
+  forbidden:
+    - recursive proof aggregation
+    - zkRollup
+    - production rollup
+    - full shielded wallet

@@ -1,0 +1,7 @@
+[package]
+name = "batchguard_rollup"
+type = "bin"
+authors = [""]
+compiler_version = ">=1.0.0"
+
+[dependencies]

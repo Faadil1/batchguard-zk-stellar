@@ -80,6 +80,37 @@ transaction simulation failed: HostError: Error(Contract, #4)
 | evidence/gate3-invalid-invoice-batch-onchain.log | Tampered proof rejected |
 | evidence/artifacts/invoice_batch/ | proof, vk, public inputs, generated fields |
 
+
+## Wild-adjacent extension: BatchGuard Rollup
+
+BatchGuard Rollup is an additive extension that proves two private invoice batches in one proof.
+
+This is not recursive proof aggregation and not a zkRollup. It is an aggregation-inspired multi-batch settlement proof: one Noir circuit checks two private batches, one UltraHonk proof is generated, and one Stellar Soroban verifier call accepts or rejects that proof.
+
+Gate 4 result:
+
+| Claim | Status |
+|---|---|
+| batchguard_rollup circuit test | PASS / LOCAL |
+| rollup proof generated | PASS / LOCAL |
+| invalid rollup witness rejected | PASS / LOCAL |
+| valid rollup proof accepted by Soroban | PASS / LOCAL |
+| tampered rollup proof rejected by Soroban | PASS / LOCAL |
+
+Rollup contract ID:
+
+CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+
+Evidence:
+
+- evidence/gate-4-rollup-result.yaml
+- evidence/gate4-rollup-nargo-test.log
+- evidence/gate4-rollup-build.log
+- evidence/gate4-rollup-invalid-witness.log
+- evidence/gate4-rollup-valid-onchain-2.log
+- evidence/gate4-rollup-invalid-onchain.log
+- evidence/artifacts/batchguard_rollup/
+
 ## Wild roadmap
 
 | Feature | Status |

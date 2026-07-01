@@ -43,3 +43,21 @@ BatchGuard is a hackathon proof-of-concept. The commitment scheme, deployment en
 ## Wild extension path
 
 The next additive upgrade is BatchGuard Rollup: an aggregation-inspired multi-batch circuit where one proof covers two private invoice batches. This is not claimed unless implemented and tested.
+
+
+## Wild-adjacent extension implemented: BatchGuard Rollup
+
+BatchGuard Rollup extends the core invoice settlement gate from one private invoice batch to two private invoice batches in one proof.
+
+This is honestly framed as an aggregation-inspired multi-batch proof, not recursion and not a zkRollup.
+
+Implemented result:
+
+- New circuit: circuits/batchguard_rollup
+- One proof covers two private invoice batches
+- Invalid rollup witness rejected during proof generation
+- Valid rollup proof accepted by Stellar Soroban localnet
+- Tampered rollup proof rejected by the same Soroban contract
+- Rollup contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
+
+Evidence: evidence/gate-4-rollup-result.yaml

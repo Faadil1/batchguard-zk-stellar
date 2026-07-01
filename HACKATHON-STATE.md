@@ -39,3 +39,16 @@ PASS / LOCAL.
 ## Freeze rule
 
 The invoice_batch technical proof core is frozen. Any Wild upgrade must be additive and must not modify the proven core.
+
+
+## Gate 4 — BatchGuard Rollup
+
+PASS / LOCAL.
+
+- Additive circuit: circuits/batchguard_rollup.
+- One proof covers two private invoice batches.
+- Valid rollup proof accepted by Soroban localnet.
+- Tampered rollup proof rejected by the same Soroban contract.
+- Contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY.
+- Framing: aggregation-inspired multi-batch proof.
+- Not claimed: recursive proof aggregation, zkRollup, production rollup, full shielded wallet.

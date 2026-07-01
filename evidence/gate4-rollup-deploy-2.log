@@ -1,0 +1,652 @@
+./scripts/deploy.sh
+[0;34m1. Ensuring alice account is set up...[0m
+[0;34mChecking/Generating identity for 'alice'...[0m
+[0;34mFunding 'alice' on network 'local'...[0m
+✅ Account alice funded on "Standalone Network ; February 2017"
+[0;32mAddress for 'alice':[0m
+GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ
+[0;34m2. Rebuilding circuits...[0m
+=== Building range_heavy ===
+[range_heavy] Circuit witness successfully solved
+[range_heavy] Witness saved to target/range_heavy.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building tornado ===
+[tornado] generating Prover.toml inputs (seed=1)
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling cfg-if v1.0.4
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling syn v2.0.117
+   Compiling zmij v1.0.21
+   Compiling serde_json v1.0.150
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.1
+   Compiling generic-array v0.14.9
+   Compiling subtle v2.6.1
+   Compiling libc v0.2.186
+   Compiling autocfg v1.5.1
+   Compiling const-oid v0.9.6
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling cpufeatures v0.2.17
+   Compiling darling_core v0.23.0
+   Compiling getrandom v0.2.17
+   Compiling rand_core v0.6.4
+   Compiling zerocopy v0.8.50
+   Compiling serde_derive v1.0.228
+   Compiling zeroize_derive v1.4.3
+   Compiling zeroize v1.8.2
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling darling_macro v0.23.0
+   Compiling schemars v0.8.22
+   Compiling semver v1.0.28
+   Compiling darling v0.23.0
+   Compiling dyn-clone v1.0.20
+   Compiling serde_with_macros v3.20.0
+   Compiling crate-git-revision v0.0.6
+   Compiling stellar-strkey v0.0.13
+   Compiling data-encoding v2.11.0
+   Compiling paste v1.0.15
+   Compiling hex v0.4.3
+   Compiling stellar-xdr v26.0.1
+   Compiling num-integer v0.1.46
+   Compiling cfg_eval v0.1.2
+   Compiling ethnum v1.5.3
+   Compiling escape-bytes v0.1.1
+   Compiling num-bigint v0.4.6
+   Compiling ppv-lite86 v0.2.21
+   Compiling sha2 v0.10.9
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.6
+   Compiling serde_with v3.20.0
+   Compiling enum-ordinalize-derive v4.3.2
+   Compiling enum-ordinalize v4.3.2
+   Compiling ark-std v0.5.0
+   Compiling rustc_version v0.4.1
+   Compiling der v0.7.10
+   Compiling ark-serialize-derive v0.5.0
+   Compiling ff v0.13.1
+   Compiling ahash v0.8.12
+   Compiling either v1.16.0
+   Compiling arrayvec v0.7.6
+   Compiling hashbrown v0.17.1
+   Compiling base16ct v0.2.0
+   Compiling equivalent v1.0.2
+   Compiling itertools v0.13.0
+   Compiling indexmap v2.14.0
+   Compiling sec1 v0.7.3
+   Compiling ark-serialize v0.5.0
+   Compiling group v0.13.0
+   Compiling educe v0.6.0
+   Compiling ark-ff-macros v0.5.0
+   Compiling signature v2.2.0
+   Compiling crypto-bigint v0.5.5
+   Compiling ark-ff-asm v0.5.0
+   Compiling base64 v0.22.1
+   Compiling allocator-api2 v0.2.21
+   Compiling once_cell v1.21.4
+   Compiling libm v0.2.16
+   Compiling elliptic-curve v0.13.8
+   Compiling hashbrown v0.15.5
+   Compiling ark-ff v0.5.0
+   Compiling wasmparser v0.116.1
+   Compiling hmac v0.12.1
+   Compiling thiserror v1.0.69
+   Compiling rfc6979 v0.4.0
+   Compiling ark-poly v0.5.0
+   Compiling curve25519-dalek v4.1.3
+   Compiling thiserror-impl v1.0.69
+   Compiling derive_arbitrary v1.3.2
+   Compiling num-derive v0.4.2
+   Compiling indexmap-nostd v0.4.0
+   Compiling downcast-rs v1.2.1
+   Compiling static_assertions v1.1.0
+   Compiling wasmi_core v0.13.0
+   Compiling wasmparser-nostd v0.100.2
+   Compiling arbitrary v1.3.2
+   Compiling ark-ec v0.5.0
+   Compiling ecdsa v0.16.9
+   Compiling soroban-env-common v26.1.3
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling wasmi_arena v0.4.1
+   Compiling prettyplease v0.2.37
+   Compiling spin v0.9.8
+   Compiling fnv v1.0.7
+   Compiling smallvec v1.15.1
+   Compiling soroban-wasmi v0.31.1-soroban.20.0.1
+   Compiling darling_core v0.20.11
+   Compiling soroban-env-macros v26.1.3
+   Compiling primeorder v0.13.6
+   Compiling ed25519 v2.2.3
+   Compiling keccak v0.1.6
+   Compiling byteorder v1.5.0
+   Compiling soroban-env-host v26.1.3
+   Compiling heapless v0.8.0
+   Compiling hash32 v0.3.1
+   Compiling sha3 v0.10.9
+   Compiling ed25519-dalek v2.2.0
+   Compiling p256 v0.13.2
+   Compiling darling_macro v0.20.11
+   Compiling soroban-spec v26.0.1
+   Compiling k256 v0.13.4
+   Compiling ark-bls12-381 v0.5.0
+   Compiling ark-bn254 v0.5.0
+   Compiling soroban-builtin-sdk-macros v26.1.3
+   Compiling stellar-strkey v0.0.16
+   Compiling dtor-proc-macro v0.0.6
+   Compiling hex-literal v0.4.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling dtor v0.1.1
+   Compiling soroban-spec-rust v26.0.1
+   Compiling darling v0.20.11
+   Compiling soroban-sdk v26.0.1
+   Compiling macro-string v0.1.4
+   Compiling heck v0.5.0
+   Compiling ctor-proc-macro v0.0.6
+   Compiling ctor v0.5.0
+   Compiling bytes-lit v0.0.5
+   Compiling visibility v0.1.1
+   Compiling soroban-sdk-macros v26.0.1
+   Compiling soroban-ledger-snapshot v26.0.1
+   Compiling ultrahonk_soroban_verifier v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/crates/ultrahonk-soroban-verifier)
+   Compiling soroban-poseidon v26.0.0
+   Compiling rs-soroban-ultrahonk v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/rs-soroban-ultrahonk)
+   Compiling tornado_classic_contracts v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/tornado_classic/contracts)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2m 40s
+     Running `target/debug/examples/populate_publics`
+Updated Prover.toml with public inputs and path_index
+[tornado_classic] Circuit witness successfully solved
+[tornado_classic] Witness saved to target/tornado_classic.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Generating E2E artifacts for tornado ===
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+     Running `target/debug/examples/populate_publics`
+Updated Prover.toml with public inputs and path_index
+[tornado_classic] Circuit witness successfully solved
+[tornado_classic] Witness saved to target/tornado_classic.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/e2e/public_inputs"
+Public inputs fields saved to "target/e2e/public_inputs_fields.json"
+Proof saved to "target/e2e/proof"
+Proof fields saved to "target/e2e/proof_fields.json"
+=== Building lookup_heavy ===
+[lookup_heavy] Circuit witness successfully solved
+[lookup_heavy] Witness saved to target/lookup_heavy.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building small_circuit ===
+[small_circuit] Circuit witness successfully solved
+[small_circuit] Witness saved to target/small_circuit.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building invoice_batch ===
+[invoice_batch] Circuit witness successfully solved
+[invoice_batch] Witness saved to target/invoice_batch.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building identity ===
+[identity] Circuit witness successfully solved
+[identity] Witness saved to target/identity.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building fib_chain ===
+[fib_chain] Circuit witness successfully solved
+[fib_chain] Witness saved to target/fib_chain.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building many_pubs ===
+warning: unused variable p16
+  ┌─ src/main.nr:6:5
+  │
+6 │     p16: pub Field, p17: pub Field
+  │     --- unused variable
+  │
+
+warning: unused variable p6
+  ┌─ src/main.nr:3:35
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p9
+  ┌─ src/main.nr:4:20
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p5
+  ┌─ src/main.nr:3:20
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p12
+  ┌─ src/main.nr:5:5
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │     --- unused variable
+  │
+
+warning: unused variable p4
+  ┌─ src/main.nr:3:5
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p7
+  ┌─ src/main.nr:3:50
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p1
+  ┌─ src/main.nr:2:20
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p10
+  ┌─ src/main.nr:4:35
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                   --- unused variable
+  │
+
+warning: unused variable p8
+  ┌─ src/main.nr:4:5
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p15
+  ┌─ src/main.nr:5:53
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                                     --- unused variable
+  │
+
+warning: unused variable p3
+  ┌─ src/main.nr:2:50
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p2
+  ┌─ src/main.nr:2:35
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p11
+  ┌─ src/main.nr:4:51
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                                   --- unused variable
+  │
+
+warning: unused variable p13
+  ┌─ src/main.nr:5:21
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                     --- unused variable
+  │
+
+warning: unused variable p14
+  ┌─ src/main.nr:5:37
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                     --- unused variable
+  │
+
+warning: unused variable p6
+  ┌─ src/main.nr:3:35
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p3
+  ┌─ src/main.nr:2:50
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p10
+  ┌─ src/main.nr:4:35
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                   --- unused variable
+  │
+
+warning: unused variable p5
+  ┌─ src/main.nr:3:20
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p1
+  ┌─ src/main.nr:2:20
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p12
+  ┌─ src/main.nr:5:5
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │     --- unused variable
+  │
+
+warning: unused variable p7
+  ┌─ src/main.nr:3:50
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p4
+  ┌─ src/main.nr:3:5
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p8
+  ┌─ src/main.nr:4:5
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p2
+  ┌─ src/main.nr:2:35
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p9
+  ┌─ src/main.nr:4:20
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p16
+  ┌─ src/main.nr:6:5
+  │
+6 │     p16: pub Field, p17: pub Field
+  │     --- unused variable
+  │
+
+warning: unused variable p14
+  ┌─ src/main.nr:5:37
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                     --- unused variable
+  │
+
+warning: unused variable p15
+  ┌─ src/main.nr:5:53
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                                     --- unused variable
+  │
+
+warning: unused variable p13
+  ┌─ src/main.nr:5:21
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                     --- unused variable
+  │
+
+warning: unused variable p11
+  ┌─ src/main.nr:4:51
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                                   --- unused variable
+  │
+
+[many_pubs] Circuit witness successfully solved
+[many_pubs] Witness saved to target/many_pubs.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building simple_circuit ===
+[simple_circuit] Circuit witness successfully solved
+[simple_circuit] Witness saved to target/simple_circuit.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building batchguard_rollup ===
+[batchguard_rollup] Circuit witness successfully solved
+[batchguard_rollup] Witness saved to target/batchguard_rollup.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+[0;34m3. Building the Soroban contract...[0m
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/rs-soroban-ultrahonk/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling zmij v1.0.21
+   Compiling serde_json v1.0.150
+   Compiling memchr v2.8.1
+   Compiling syn v2.0.117
+   Compiling itoa v1.0.18
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling version_check v0.9.5
+   Compiling generic-array v0.14.9
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling schemars v0.8.22
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling dyn-clone v1.0.20
+   Compiling digest v0.10.7
+   Compiling cpufeatures v0.2.17
+   Compiling cfg-if v1.0.4
+   Compiling data-encoding v2.11.0
+   Compiling sha2 v0.10.9
+   Compiling darling_core v0.23.0
+   Compiling escape-bytes v0.1.1
+   Compiling ethnum v1.5.3
+   Compiling num-traits v0.2.19
+   Compiling semver v1.0.28
+   Compiling either v1.16.0
+   Compiling itertools v0.13.0
+   Compiling serde_derive v1.0.228
+   Compiling darling_macro v0.23.0
+   Compiling darling v0.23.0
+   Compiling serde_with_macros v3.20.0
+   Compiling cfg_eval v0.1.2
+   Compiling hashbrown v0.17.1
+   Compiling thiserror v1.0.69
+   Compiling equivalent v1.0.2
+   Compiling thiserror-impl v1.0.69
+   Compiling indexmap v2.14.0
+   Compiling num-derive v0.4.2
+   Compiling prettyplease v0.2.37
+   Compiling fnv v1.0.7
+   Compiling darling_core v0.20.11
+   Compiling crate-git-revision v0.0.6
+   Compiling stellar-strkey v0.0.13
+   Compiling stellar-xdr v26.0.1
+   Compiling hex v0.4.3
+   Compiling soroban-env-common v26.1.3
+   Compiling wasmparser v0.116.1
+   Compiling serde_with v3.20.0
+   Compiling heapless v0.8.0
+   Compiling base64 v0.22.1
+   Compiling byteorder v1.5.0
+   Compiling hash32 v0.3.1
+   Compiling darling_macro v0.20.11
+   Compiling stellar-strkey v0.0.16
+   Compiling num-integer v0.1.46
+   Compiling rustc_version v0.4.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling static_assertions v1.1.0
+   Compiling soroban-sdk v26.0.1
+   Compiling num-bigint v0.4.6
+   Compiling darling v0.20.11
+   Compiling macro-string v0.1.4
+   Compiling heck v0.5.0
+   Compiling bytes-lit v0.0.5
+   Compiling visibility v0.1.1
+   Compiling soroban-spec v26.0.1
+   Compiling soroban-spec-rust v26.0.1
+   Compiling soroban-env-macros v26.1.3
+   Compiling soroban-env-guest v26.1.3
+   Compiling soroban-sdk-macros v26.0.1
+   Compiling ultrahonk_soroban_verifier v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/crates/ultrahonk-soroban-verifier)
+   Compiling rs-soroban-ultrahonk v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/rs-soroban-ultrahonk)
+    Finished `release` profile [optimized] target(s) in 1m 05s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/rs_soroban_ultrahonk.wasm (19655 bytes optimized (original size was 24336 bytes))
+    Wasm Hash: 9fee0ecfc7182be7254b5dd62831ad2bafbae5faeaf46d6342cb8be1feccd104
+    Wasm Size: 19655 bytes optimized (original size was 24336 bytes)
+    Exported Functions: 3 found
+      • __constructor
+      • verify_proof
+      • vk_bytes
+✅ Build Complete
+
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/tornado_classic/contracts/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+   Compiling escape-bytes v0.1.1
+   Compiling byteorder v1.5.0
+   Compiling num-traits v0.2.19
+   Compiling stellar-xdr v26.0.1
+   Compiling hash32 v0.3.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling static_assertions v1.1.0
+   Compiling ethnum v1.5.3
+   Compiling heapless v0.8.0
+   Compiling soroban-sdk v26.0.1
+   Compiling data-encoding v2.11.0
+   Compiling stellar-strkey v0.0.16
+   Compiling soroban-env-common v26.1.3
+   Compiling soroban-env-guest v26.1.3
+   Compiling ultrahonk_soroban_verifier v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/crates/ultrahonk-soroban-verifier)
+   Compiling soroban-poseidon v26.0.0
+   Compiling rs-soroban-ultrahonk v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/rs-soroban-ultrahonk)
+   Compiling tornado_classic_contracts v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/tornado_classic/contracts)
+    Finished `release` profile [optimized] target(s) in 17.00s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/tornado_classic_contracts.wasm (20680 bytes optimized (original size was 24676 bytes))
+    Wasm Hash: 114e917a1a94cd81544b1dba033542168ad0bb74861f86abae587e9d251ed595
+    Wasm Size: 20680 bytes optimized (original size was 24676 bytes)
+    Exported Functions: 5 found
+      • __constructor
+      • deposit
+      • get_root
+      • is_nullifier_used
+      • withdraw
+✅ Build Complete
+
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/identity/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+   Compiling identity v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/batchguard-zk-stellar/contracts/identity)
+    Finished `release` profile [optimized] target(s) in 0.69s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/identity.wasm (19445 bytes optimized (original size was 24126 bytes))
+    Wasm Hash: eb04d6cf071250d00c099391dee6572b8071546046f83ac98bd23c9c2ddd09f8
+    Wasm Size: 19445 bytes optimized (original size was 24126 bytes)
+    Exported Functions: 3 found
+      • __constructor
+      • prove_identity
+      • vk_bytes
+✅ Build Complete
+
+[0;34m4. Deploying the contract to local...[0m
+Deployment attempt 1/24...
+ℹ️  Uploading contract WASM…
+ℹ️  Skipping install because wasm already installed
+ℹ️  Deploying contract using wasm hash 9fee0ecfc7182be7254b5dd62831ad2bafbae5faeaf46d6342cb8be1feccd104
+ℹ️  Simulating transaction…
+ℹ️  Signing transaction: 89aff11963a920daa79bd9e35bf36a18851cf113f02223c406a671bce0f7d3de
+🌎 Sending transaction…
+✅ Transaction submitted successfully!
+✅ Deployed!
+
+[0;32mContract deployed successfully! Contract ID:[0m
+[0;34mCDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY (saved to .contract_id)[0m

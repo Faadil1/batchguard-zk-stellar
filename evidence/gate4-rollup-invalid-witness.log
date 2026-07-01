@@ -1,0 +1,15 @@
+bash ./circuits/scripts/build_all.sh batchguard_rollup
+=== Building batchguard_rollup ===
+error: Failed constraint
+   ┌─ src/main.nr:21:12
+   │
+21 │     assert(invoice_2_amount <= per_invoice_limit);
+   │            -------------------------------------
+   │
+   = Call stack:
+     1. src/main.nr:89:31
+     2. src/main.nr:21:12
+
+Failed to solve program: 'Cannot satisfy constraint'
+error: recipe `build-circuits` failed on line 48 with exit code 1
+INVALID_WITNESS_EXIT=1

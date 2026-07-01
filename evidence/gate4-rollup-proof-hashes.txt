@@ -1,0 +1,2 @@
+cce83e032b65a8d2d2c958c2c866bc8c72b1664ce7adc8a776fc00ead8a9c919  /tmp/batchguard_rollup.proof.valid
+2738962276b1229b7235e12e4048aa8d17d01120eccacf97d025d0b82dce4482  circuits/batchguard_rollup/target/proof

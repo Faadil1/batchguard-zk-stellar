@@ -55,23 +55,43 @@ function Hero() {
     <section className="hero">
       <div className="hero-eyebrow">
         <span className="hero-eyebrow-dot"/>
-        Stellar Soroban · UltraHonk / Noir · ZK Settlement Gate
+        Stellar Hacks: Real-World ZK · Spicy Track — Private RWA Settlement
       </div>
       <h1 className="hero-title">
         Private settlement.<br/>
         <span className="hero-title-accent">Zero exposure.</span>
       </h1>
       <p className="hero-sub">
-        BatchGuard proves that a private batch of real-world invoices satisfies
-        payment-policy rules — without revealing a single invoice amount or vendor
-        risk score to the chain. A Stellar Soroban smart contract enforces the
-        gate by verifying the proof.
+        Businesses settle invoices on Stellar without exposing amounts or vendor
+        risk scores. A Noir ZK proof guarantees the batch satisfies policy rules,
+        and a Soroban smart contract verifies it on-chain — no data leaks, no
+        trust assumptions, just math.
       </p>
       <div className="hero-meta">
         <span className="hero-pill"><span className="hero-pill-icon">⬡</span> Stellar Soroban</span>
         <span className="hero-pill"><span className="hero-pill-icon">◈</span> Noir + UltraHonk</span>
         <span className="hero-pill"><span className="hero-pill-icon">◉</span> Real-World ZK</span>
         <span className="hero-pill"><span className="hero-pill-icon">☁</span> Localnet proven</span>
+      </div>
+
+      <div className="flow-strip">
+        <div className="flow-step">
+          <div className="flow-step-num">1</div>
+          <div className="flow-step-title">Private batch</div>
+          <div className="flow-step-body">4 invoices with amounts and vendor risk scores — never touch the chain</div>
+        </div>
+        <div className="flow-arrow">→</div>
+        <div className="flow-step">
+          <div className="flow-step-num">2</div>
+          <div className="flow-step-title">ZK proof</div>
+          <div className="flow-step-body">Noir circuit proves the batch satisfies policy rules without revealing data</div>
+        </div>
+        <div className="flow-arrow">→</div>
+        <div className="flow-step">
+          <div className="flow-step-num">3</div>
+          <div className="flow-step-title">Soroban gate</div>
+          <div className="flow-step-body">Smart contract verifies the proof on-chain — accept or reject settlement</div>
+        </div>
       </div>
     </section>
   );
@@ -86,7 +106,7 @@ function SingleBatchCard() {
             <div className="proof-card-title">Single Batch Proof</div>
             <div className="proof-card-sub">4 invoices · 3 policy rules · 1 Soroban call</div>
           </div>
-          <span className="status-badge pass">Verified</span>
+          <span className="status-badge pass">Verified on Soroban</span>
         </div>
 
         <div className="policy-grid">
@@ -159,7 +179,7 @@ function RollupCard() {
             <div className="proof-card-title">Rollup Proof</div>
             <div className="proof-card-sub">8 invoices · 2 batches · 1 Soroban call</div>
           </div>
-          <span className="status-badge pass">Verified</span>
+          <span className="status-badge pass">Verified on Soroban</span>
         </div>
 
         <div className="rollup-visual">
@@ -409,10 +429,14 @@ export default function App() {
         <Hero/>
         <section id="proofs">
           <div className="section-label anim-0">Settlement Proofs</div>
+          <p className="section-intro anim-0">
+            Each proof was generated from a real Noir circuit, submitted to a Stellar Soroban
+            smart contract on localnet, and verified on-chain. Tampered proofs were rejected.
+          </p>
           <div className="bento">
+            <VisibilityCard/>
             <SingleBatchCard/>
             <RollupCard/>
-            <VisibilityCard/>
           </div>
         </section>
         <TrustPanel/>

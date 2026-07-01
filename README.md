@@ -135,3 +135,8 @@ Run:
 7. just verify "$(cat .contract_id)"
 
 DATASET_DIR defaults to circuits/invoice_batch/target, so deploy and verify use the BatchGuard circuit artifacts automatically.
+
+
+## Live UI
+
+BatchGuard Settlement Console: https://faadil1.github.io/batchguard-zk-stellar/

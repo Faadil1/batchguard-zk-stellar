@@ -61,3 +61,8 @@ Implemented result:
 - Rollup contract ID: CDHTB4YVDV4Q4HZOMSN25URDWVCJI37F6QZMFACYH7YCVWAXOEET5NBY
 
 Evidence: evidence/gate-4-rollup-result.yaml
+
+
+## Live UI
+
+BatchGuard Settlement Console: https://faadil1.github.io/batchguard-zk-stellar/

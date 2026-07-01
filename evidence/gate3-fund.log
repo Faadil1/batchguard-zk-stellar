@@ -1,0 +1,6 @@
+./scripts/fund_account.sh
+[0;34mChecking/Generating identity for 'alice'...[0m
+[0;34mFunding 'alice' on network 'local'...[0m
+✅ Account alice funded on "Standalone Network ; February 2017"
+[0;32mAddress for 'alice':[0m
+GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ

@@ -1,0 +1,9 @@
+./scripts/verify.sh CB2FHR3R3YAJQ66HYTEYMOTF6W4FF5ACD47HQLJQ7T6ECF4G6ZRC2FTS
+[0;34m--- Artifact Summary ---[0m
+Public Inputs : 32 bytes
+Proof         : 14592 bytes
+------------------------
+[0;34mInvoking verify_proof on contract CB2FHR3R3YAJQ66HYTEYMOTF6W4FF5ACD47HQLJQ7T6ECF4G6ZRC2FTS...[0m
+❌ error: client error (Connect)
+error: recipe `verify` failed on line 69 with exit code 1
+INVALID_EXIT=1

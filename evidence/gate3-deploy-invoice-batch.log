@@ -1,0 +1,401 @@
+./scripts/deploy.sh
+[0;34m1. Ensuring alice account is set up...[0m
+[0;34mChecking/Generating identity for 'alice'...[0m
+[0;34mFunding 'alice' on network 'local'...[0m
+✅ Account alice funded on "Standalone Network ; February 2017"
+[0;32mAddress for 'alice':[0m
+GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ
+[0;34m2. Rebuilding circuits...[0m
+=== Building range_heavy ===
+[range_heavy] Circuit witness successfully solved
+[range_heavy] Witness saved to target/range_heavy.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building tornado ===
+[tornado] generating Prover.toml inputs (seed=1)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s
+     Running `target/debug/examples/populate_publics`
+Updated Prover.toml with public inputs and path_index
+[tornado_classic] Circuit witness successfully solved
+[tornado_classic] Witness saved to target/tornado_classic.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Generating E2E artifacts for tornado ===
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
+     Running `target/debug/examples/populate_publics`
+Updated Prover.toml with public inputs and path_index
+[tornado_classic] Circuit witness successfully solved
+[tornado_classic] Witness saved to target/tornado_classic.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/e2e/public_inputs"
+Public inputs fields saved to "target/e2e/public_inputs_fields.json"
+Proof saved to "target/e2e/proof"
+Proof fields saved to "target/e2e/proof_fields.json"
+=== Building lookup_heavy ===
+[lookup_heavy] Circuit witness successfully solved
+[lookup_heavy] Witness saved to target/lookup_heavy.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building small_circuit ===
+[small_circuit] Circuit witness successfully solved
+[small_circuit] Witness saved to target/small_circuit.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building invoice_batch ===
+[invoice_batch] Circuit witness successfully solved
+[invoice_batch] Witness saved to target/invoice_batch.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building identity ===
+[identity] Circuit witness successfully solved
+[identity] Witness saved to target/identity.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building fib_chain ===
+[fib_chain] Circuit witness successfully solved
+[fib_chain] Witness saved to target/fib_chain.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building many_pubs ===
+warning: unused variable p2
+  ┌─ src/main.nr:2:35
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p13
+  ┌─ src/main.nr:5:21
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                     --- unused variable
+  │
+
+warning: unused variable p10
+  ┌─ src/main.nr:4:35
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                   --- unused variable
+  │
+
+warning: unused variable p15
+  ┌─ src/main.nr:5:53
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                                     --- unused variable
+  │
+
+warning: unused variable p3
+  ┌─ src/main.nr:2:50
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p11
+  ┌─ src/main.nr:4:51
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                                   --- unused variable
+  │
+
+warning: unused variable p14
+  ┌─ src/main.nr:5:37
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                     --- unused variable
+  │
+
+warning: unused variable p5
+  ┌─ src/main.nr:3:20
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p12
+  ┌─ src/main.nr:5:5
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │     --- unused variable
+  │
+
+warning: unused variable p1
+  ┌─ src/main.nr:2:20
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p4
+  ┌─ src/main.nr:3:5
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p8
+  ┌─ src/main.nr:4:5
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p9
+  ┌─ src/main.nr:4:20
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p7
+  ┌─ src/main.nr:3:50
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p16
+  ┌─ src/main.nr:6:5
+  │
+6 │     p16: pub Field, p17: pub Field
+  │     --- unused variable
+  │
+
+warning: unused variable p6
+  ┌─ src/main.nr:3:35
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p12
+  ┌─ src/main.nr:5:5
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │     --- unused variable
+  │
+
+warning: unused variable p3
+  ┌─ src/main.nr:2:50
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p11
+  ┌─ src/main.nr:4:51
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                                   --- unused variable
+  │
+
+warning: unused variable p4
+  ┌─ src/main.nr:3:5
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p9
+  ┌─ src/main.nr:4:20
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p16
+  ┌─ src/main.nr:6:5
+  │
+6 │     p16: pub Field, p17: pub Field
+  │     --- unused variable
+  │
+
+warning: unused variable p14
+  ┌─ src/main.nr:5:37
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                     --- unused variable
+  │
+
+warning: unused variable p6
+  ┌─ src/main.nr:3:35
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p2
+  ┌─ src/main.nr:2:35
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                                   -- unused variable
+  │
+
+warning: unused variable p8
+  ┌─ src/main.nr:4:5
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │     -- unused variable
+  │
+
+warning: unused variable p13
+  ┌─ src/main.nr:5:21
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                     --- unused variable
+  │
+
+warning: unused variable p5
+  ┌─ src/main.nr:3:20
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p10
+  ┌─ src/main.nr:4:35
+  │
+4 │     p8: pub Field, p9: pub Field, p10: pub Field, p11: pub Field,
+  │                                   --- unused variable
+  │
+
+warning: unused variable p7
+  ┌─ src/main.nr:3:50
+  │
+3 │     p4: pub Field, p5: pub Field, p6: pub Field, p7: pub Field,
+  │                                                  -- unused variable
+  │
+
+warning: unused variable p1
+  ┌─ src/main.nr:2:20
+  │
+2 │     p0: pub Field, p1: pub Field, p2: pub Field, p3: pub Field,
+  │                    -- unused variable
+  │
+
+warning: unused variable p15
+  ┌─ src/main.nr:5:53
+  │
+5 │     p12: pub Field, p13: pub Field, p14: pub Field, p15: pub Field,
+  │                                                     --- unused variable
+  │
+
+[many_pubs] Circuit witness successfully solved
+[many_pubs] Witness saved to target/many_pubs.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+=== Building simple_circuit ===
+[simple_circuit] Circuit witness successfully solved
+[simple_circuit] Witness saved to target/simple_circuit.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"
+[0;34m3. Building the Soroban contract...[0m
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/rs-soroban-ultrahonk/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+   Compiling rs-soroban-ultrahonk v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/rs-soroban-ultrahonk/contracts/rs-soroban-ultrahonk)
+    Finished `release` profile [optimized] target(s) in 0.74s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/rs_soroban_ultrahonk.wasm (19655 bytes optimized (original size was 24336 bytes))
+    Wasm Hash: 9fee0ecfc7182be7254b5dd62831ad2bafbae5faeaf46d6342cb8be1feccd104
+    Wasm Size: 19655 bytes optimized (original size was 24336 bytes)
+    Exported Functions: 3 found
+      • __constructor
+      • verify_proof
+      • vk_bytes
+✅ Build Complete
+
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/tornado_classic/contracts/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+   Compiling rs-soroban-ultrahonk v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/rs-soroban-ultrahonk/contracts/rs-soroban-ultrahonk)
+   Compiling tornado_classic_contracts v0.1.0 (/home/wdecoded92/batchguard-zk-gate1/rs-soroban-ultrahonk/contracts/tornado_classic/contracts)
+    Finished `release` profile [optimized] target(s) in 1.35s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/tornado_classic_contracts.wasm (20680 bytes optimized (original size was 24676 bytes))
+    Wasm Hash: 114e917a1a94cd81544b1dba033542168ad0bb74861f86abae587e9d251ed595
+    Wasm Size: 20680 bytes optimized (original size was 24676 bytes)
+    Exported Functions: 5 found
+      • __constructor
+      • deposit
+      • get_root
+      • is_nullifier_used
+      • withdraw
+✅ Build Complete
+
+ℹ️  CARGO_BUILD_RUSTFLAGS=--remap-path-prefix=/home/wdecoded92/.cargo/registry/src= SOROBAN_SDK_BUILD_SYSTEM_SUPPORTS_SPEC_SHAKING_V2=1 cargo rustc --manifest-path=contracts/identity/Cargo.toml --crate-type=cdylib --target=wasm32v1-none --release
+    Finished `release` profile [optimized] target(s) in 0.14s
+ℹ️  Build Summary:
+    Wasm File: target/wasm32v1-none/release/identity.wasm (19445 bytes optimized (original size was 24126 bytes))
+    Wasm Hash: eb04d6cf071250d00c099391dee6572b8071546046f83ac98bd23c9c2ddd09f8
+    Wasm Size: 19445 bytes optimized (original size was 24126 bytes)
+    Exported Functions: 3 found
+      • __constructor
+      • prove_identity
+      • vk_bytes
+✅ Build Complete
+
+[0;34m4. Deploying the contract to local...[0m
+Deployment attempt 1/24...
+ℹ️  Uploading contract WASM…
+ℹ️  Skipping install because wasm already installed
+ℹ️  Deploying contract using wasm hash 9fee0ecfc7182be7254b5dd62831ad2bafbae5faeaf46d6342cb8be1feccd104
+ℹ️  Simulating transaction…
+ℹ️  Signing transaction: c5ba31a9ca0339ca8c92610ebf1e10701d39efcdc0e7213d989bf7b789d9dfc7
+🌎 Sending transaction…
+✅ Transaction submitted successfully!
+✅ Deployed!
+
+[0;32mContract deployed successfully! Contract ID:[0m
+[0;34mCAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I (saved to .contract_id)[0m

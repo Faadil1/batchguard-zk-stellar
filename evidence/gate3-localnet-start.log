@@ -1,0 +1,9 @@
+./scripts/start_stellar.sh 
+[0;34mStarting Stellar localnet container (stellar-local)...[0m
+ℹ️  Starting local network
+ℹ️  Overriding docker image tag to use 'future' instead of 'testing'
+ℹ️  Pulling from stellar/quickstart
+ℹ️  Digest: sha256:743a489fcfb76f3761bfd2c0cbafc1be8ffa504fd2616e8d1962aefd0112881a
+ℹ️  Status: Image is up to date for stellar/quickstart:future
+❌ error: ⛔ ️ a container named "stellar-stellar-local" already running
+error: recipe `start` failed on line 31 with exit code 1

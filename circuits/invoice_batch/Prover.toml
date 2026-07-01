@@ -1,0 +1,16 @@
+invoice_0_amount = "1200"
+invoice_1_amount = "2300"
+invoice_2_amount = "1800"
+invoice_3_amount = "900"
+
+vendor_0_risk = "2"
+vendor_1_risk = "3"
+vendor_2_risk = "1"
+vendor_3_risk = "2"
+
+batch_nonce = "42"
+
+per_invoice_limit = "2500"
+batch_total_limit = "7000"
+max_vendor_risk = "5"
+batch_commitment = "5042103274"

@@ -1,0 +1,13 @@
++ set -e
++ BB_HOME=/home/wdecoded92/.bb
++ main -nv 1.0.0-beta.9
++ need_cmd curl
++ check_cmd curl
++ command -v curl
++ [[ -n -nv ]]
++ case $1 in
++ err 'internal error: unknown option -nv\n'
++ say 'internal error: unknown option -nv\n'
++ printf 'bbup: %s\n' 'internal error: unknown option -nv\n'
+bbup: internal error: unknown option -nv\n
++ exit 1

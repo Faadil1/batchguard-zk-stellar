@@ -1,0 +1,61 @@
+./scripts/setup.sh
+[0;34m=== Ultrahonk Verifier: Local Environment Setup ===[0m
+
+[0;34m1. Checking dependencies...[0m
+[0;32m✓ stellar is installed[0m
+[0;32m✓ docker is installed[0m
+[0;32m✓ rustc is installed[0m
+[0;32m✓ cargo is installed[0m
+[0;32m✓ nargo is installed[0m
+[0;32m✓ bb is installed[0m
+[0;32m✓ node is installed[0m
+[0;32m✓ npm is installed[0m
+[0;32m✓ curl is installed[0m
+
+[0;34m2. Checking just (task runner)...[0m
+[0;32m✓ just is installed[0m
+
+[0;34m3. Adding Soroban Rust target...[0m
+info: component 'rust-std' for target 'wasm32v1-none' is up to date
+[0;32m✓ Target wasm32v1-none added[0m
+
+[0;34m4. Installing Node.js dependencies...[0m
+Installing measurement script dependencies (npm install)...
+
+added 80 packages, and audited 81 packages in 4s
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+4 vulnerabilities (1 low, 1 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[0;32m✓ measure_ultrahonk_costs dependencies installed[0m
+Installing invocation script dependencies (npm install)...
+
+added 80 packages, and audited 81 packages in 2s
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+4 vulnerabilities (1 low, 1 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[0;32m✓ invoke_ultrahonk dependencies installed[0m
+
+[0;32m=== Setup Complete! ===[0m
+You can now start developing. Quick start with just:
+  [0;34mjust --list[0m   - Show all available commands
+  [0;34mjust e2e[0m      - Run full localnet pipeline
+
+Or step by step:
+  1. [0;34mjust start[0m   - Start localnet
+  2. [0;34mjust fund[0m    - Fund 'alice' account
+  3. [0;34mjust deploy[0m  - Build and deploy contract
+  4. [0;34mjust verify[0m  - Run verification and measurements

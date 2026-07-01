@@ -1,0 +1,21 @@
+
+[1m╔══════════════════════════════════════════════════════════════════╗[0m
+[1m║  BatchGuard ZK — GATE 1 Preflight Check                        ║[0m
+[1m║  Stellar Hacks: Real-World ZK                                  ║[0m
+[1m╚══════════════════════════════════════════════════════════════════╝[0m
+
+Timestamp: 2026-07-01T14:47:27Z
+Hostname:  cs-754928739639-default
+User:      wdecoded92
+
+[1m── Operating System ──────────────────────────────────────────────[0m
+  OS: Ubuntu 24.04.4 LTS
+[0;32m[PASS][0m OS detected: Ubuntu 24.04.4 LTS
+
+[1m── Docker ────────────────────────────────────────────────────────[0m
+  Docker version 29.6.1, build 8900f1d
+[0;32m[PASS][0m Docker daemon is running and accessible
+
+[1m── Rust Toolchain ────────────────────────────────────────────────[0m
+  rustup: rustup 1.26.0 (2026-04-20)
+[0;32m[PASS][0m rustup found (needed to add wasm32v1-none target)

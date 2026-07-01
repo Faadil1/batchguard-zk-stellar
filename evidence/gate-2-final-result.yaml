@@ -1,0 +1,32 @@
+gate_2_result:
+  classification: PASS
+  evidence_label: LOCAL
+  product_circuit: invoice_batch
+  description: "BatchGuard private invoice batch policy circuit"
+  private_inputs:
+    - invoice_0_amount
+    - invoice_1_amount
+    - invoice_2_amount
+    - invoice_3_amount
+    - vendor_0_risk
+    - vendor_1_risk
+    - vendor_2_risk
+    - vendor_3_risk
+    - batch_nonce
+  public_inputs:
+    per_invoice_limit: 2500
+    batch_total_limit: 7000
+    max_vendor_risk: 5
+    batch_commitment: 5042103274
+  valid_batch:
+    proof_generated: true
+    vk_generated: true
+    public_inputs_generated: true
+    noir_test: "1 test passed"
+  invalid_batch:
+    status: REJECTED
+    tamper_method: "invoice_1_amount set to 2600 while per_invoice_limit is 2500"
+    rejection: "Failed constraint at assert(invoice_1_amount <= per_invoice_limit)"
+    invalid_witness_exit: 1
+  restored_valid_artifacts: true
+next_action: "GATE 3: deploy Soroban verifier with invoice_batch VK and verify invoice_batch proof on-chain."

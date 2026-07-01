@@ -1,0 +1,19 @@
+./scripts/start_stellar.sh 
+[0;34mStarting Stellar localnet container (stellar-local)...[0m
+ℹ️  Starting local network
+ℹ️  Overriding docker image tag to use 'future' instead of 'testing'
+ℹ️  Pulling from stellar/quickstart
+ℹ️  Digest: sha256:743a489fcfb76f3761bfd2c0cbafc1be8ffa504fd2616e8d1962aefd0112881a
+ℹ️  Status: Image is up to date for stellar/quickstart:future
+✅ Started container
+🔎 Watch logs with `stellar container logs stellar-local --docker-host unix:///var/run/docker.sock`
+ℹ️  Stop the container with `stellar container stop stellar-local --docker-host unix:///var/run/docker.sock`
+[0;34mConfiguring network profile (local)...[0m
+ℹ️  The default network is set to `local`
+[0;34mWaiting for local network to become healthy (120 attempts)...[0m
+Final network health check...
+{"status":"healthy","latestLedger":7,"oldestLedger":7,"ledgerRetentionWindow":120960}
+[0;34mWaiting for friendbot to become ready...[0m
+[0;32m✓ Friendbot ready (HTTP 400)[0m
+
+[0;32mStellar localnet is running and ready![0m

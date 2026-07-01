@@ -1,0 +1,1664 @@
+
+[1m╔══════════════════════════════════════════════════════════════════╗[0m
+[1m║  BatchGuard ZK — GATE 1 Soroban ZK Verifier Spike              ║[0m
+[1m║  Loop: technical_spike_repair  Max attempts: 3                 ║[0m
+[1m╚══════════════════════════════════════════════════════════════════╝[0m
+
+Start: 2026-07-01T14:52:34Z
+Host:  cs-754928739639-default
+User:  wdecoded92
+Log:   /home/wdecoded92/batchguard-zk-gate1/evidence/cloudshell-run.log (this output is already being captured if you piped to tee)
+
+
+[0;36m[1m▶ STEP: 0. Pre-flight sanity: Docker[0m
+
+[0;32m[OK][0m Docker: Docker version 29.6.1, build 8900f1d
+
+[0;36m[1m▶ STEP: 1. Rust toolchain — rustup[0m
+
+[0;32m[OK][0m rustup already present: rustup 1.26.0 (2026-04-20)
+[0;32m[OK][0m rustc: rustc 1.96.1 (31fca3adb 2026-06-26)
+[0;32m[OK][0m cargo: cargo 1.96.1 (356927216 2026-06-26)
+
+[0;36m[1m▶ STEP: 2. WASM targets[0m
+
+info: component 'rust-std' for target 'wasm32v1-none' is up to date
+[0;32m[OK][0m wasm32v1-none added
+info: component 'rust-std' for target 'wasm32-unknown-unknown' is up to date
+[0;32m[OK][0m wasm32-unknown-unknown added
+
+[0;36m[1m▶ STEP: 3. stellar-cli[0m
+
+[0;32m[OK][0m stellar not found — installing via cargo
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded stellar-cli v27.0.0
+  Installing stellar-cli v27.0.0
+    Updating crates.io index
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded aead v0.5.2
+  Downloaded adler2 v2.0.1
+  Downloaded aes v0.8.4
+  Downloaded deranged v0.5.3
+  Downloaded data-encoding v2.9.0
+  Downloaded derive-new v0.7.0
+  Downloaded csv-core v0.1.12
+  Downloaded bech32 v0.9.1
+  Downloaded ark-serialize v0.5.0
+  Downloaded der v0.7.10
+  Downloaded icu_provider v2.0.0
+  Downloaded idna_adapter v1.2.1
+  Downloaded humantime v2.2.0
+  Downloaded icu_properties v2.0.1
+  Downloaded ident_case v1.0.1
+  Downloaded enum-ordinalize-derive v4.3.2
+  Downloaded elliptic-curve v0.13.8
+  Downloaded colorchoice v1.0.4
+  Downloaded httpdate v1.0.3
+  Downloaded futures-sink v0.3.31
+  Downloaded cfg_eval v0.1.2
+  Downloaded futures-io v0.3.31
+  Downloaded form_urlencoded v1.2.2
+  Downloaded errno v0.3.13
+  Downloaded ledger-apdu v0.10.0
+  Downloaded hyper-rustls v0.27.7
+  Downloaded macro-string v0.1.4
+  Downloaded ledger-transport v0.10.0
+  Downloaded ledger-transport-hid v0.10.0
+  Downloaded event-listener v5.4.1
+  Downloaded opaque-debug v0.3.1
+  Downloaded num-iter v0.1.45
+  Downloaded getrandom v0.2.16
+  Downloaded proc-macro-crate v3.3.0
+  Downloaded pin-project-internal v1.1.10
+  Downloaded openssl-macros v0.1.1
+  Downloaded num-rational v0.4.2
+  Downloaded phf_macros v0.11.3
+  Downloaded pkcs8 v0.10.2
+  Downloaded phf_generator v0.11.3
+  Downloaded pin-project v1.1.10
+  Downloaded rustc-hash v1.1.0
+  Downloaded quinn-udp v0.5.14
+  Downloaded pin-project-lite v0.2.16
+  Downloaded rustc-hash v2.1.1
+  Downloaded hyper v1.7.0
+  Downloaded same-file v1.0.6
+  Downloaded idna v1.1.0
+  Downloaded rustc_version v0.4.1
+  Downloaded scopeguard v1.2.0
+  Downloaded serde-value v0.7.0
+  Downloaded rust-embed-utils v8.7.2
+  Downloaded icu_properties_data v2.0.1
+  Downloaded shell-escape v0.1.5
+  Downloaded sha1 v0.10.6
+  Downloaded serde-aux v4.7.0
+  Downloaded semver v1.0.26
+  Downloaded siphasher v1.0.1
+  Downloaded hkdf v0.12.4
+  Downloaded rand_chacha v0.9.0
+  Downloaded rustversion v1.0.22
+  Downloaded soroban-builtin-sdk-macros v27.0.0
+  Downloaded slab v0.4.11
+  Downloaded secret-service v4.0.0
+  Downloaded soroban-token-spec v27.0.0-rc.1
+  Downloaded sha2 v0.9.9
+  Downloaded shlex v1.3.0
+  Downloaded serde_derive v1.0.228
+  Downloaded keccak v0.1.6
+  Downloaded strsim v0.11.1
+  Downloaded strum v0.17.1
+  Downloaded stable_deref_trait v1.2.0
+  Downloaded strum v0.26.3
+  Downloaded sync_wrapper v1.0.2
+  Downloaded strum v0.24.1
+  Downloaded schemars v0.8.22
+  Downloaded stellar-strkey v0.0.13
+  Downloaded soroban-spec v27.0.0-rc.1
+  Downloaded sharded-slab v0.1.7
+  Downloaded thiserror-impl-no-std v2.0.2
+  Downloaded memoffset v0.9.1
+  Downloaded is_terminal_polyfill v1.70.1
+  Downloaded serde_derive_internals v0.29.1
+  Downloaded itoa v1.0.15
+  Downloaded schemars v1.0.4
+  Downloaded time-core v0.1.8
+  Downloaded termcolor_output_impl v1.0.0
+  Downloaded termcolor_output v1.0.1
+  Downloaded tap v1.0.1
+  Downloaded subtle v2.6.1
+  Downloaded async-trait v0.1.89
+  Downloaded stellar-asset-spec v27.0.0-rc.1
+  Downloaded static_assertions v1.1.0
+  Downloaded strum_macros v0.24.3
+  Downloaded cbc v0.1.2
+  Downloaded thiserror-impl v1.0.69
+  Downloaded thiserror-impl v2.0.18
+  Downloaded tokio-macros v2.7.0
+  Downloaded thiserror v2.0.18
+  Downloaded toml_datetime v0.6.11
+  Downloaded toml_write v0.1.2
+  Downloaded thiserror v1.0.69
+  Downloaded time-macros v0.2.27
+  Downloaded rand v0.8.5
+  Downloaded spin v0.9.8
+  Downloaded soroban-spec-tools v27.0.0
+  Downloaded soroban-sdk-macros v27.0.0-rc.1
+  Downloaded bs58 v0.5.1
+  Downloaded tower-service v0.3.3
+  Downloaded tower-layer v0.3.3
+  Downloaded strum_macros v0.26.4
+  Downloaded secp256k1 v0.30.0
+  Downloaded serde v1.0.228
+  Downloaded stellar-rpc-client v27.0.0
+  Downloaded crc32fast v1.5.0
+  Downloaded thread_local v1.1.9
+  Downloaded thiserror-no-std v2.0.2
+  Downloaded clap_derive v4.6.1
+  Downloaded async-compression v0.4.30
+  Downloaded tinyvec_macros v0.1.1
+  Downloaded tokio-native-tls v0.3.1
+  Downloaded jsonrpsee-types v0.26.0
+  Downloaded tinystr v0.8.1
+  Downloaded try-lock v0.2.5
+  Downloaded unarray v0.1.4
+  Downloaded hidapi v1.5.0
+  Downloaded rand v0.9.2
+  Downloaded tokio-rustls v0.26.2
+  Downloaded termcolor v1.4.1
+  Downloaded soroban-env-common v27.0.0
+  Downloaded soroban-ledger-snapshot v27.0.0-rc.1
+  Downloaded mime v0.3.17
+  Downloaded utf8_iter v1.0.4
+  Downloaded universal-hash v0.5.1
+  Downloaded untrusted v0.9.0
+  Downloaded tempfile v3.21.0
+  Downloaded socket2 v0.6.4
+  Downloaded arbitrary v1.3.2
+  Downloaded pathdiff v0.2.3
+  Downloaded camino v1.1.12
+  Downloaded bitflags v2.11.0
+  Downloaded potential_utf v0.1.3
+  Downloaded percent-encoding v2.3.2
+  Downloaded strum_macros v0.17.1
+  Downloaded spki v0.7.3
+  Downloaded soroban-token-sdk v27.0.0-rc.1
+  Downloaded soroban-env-macros v27.0.0
+  Downloaded want v0.3.1
+  Downloaded rand_core v0.9.3
+  Downloaded ipnet v2.11.0
+  Downloaded ulid v1.2.1
+  Downloaded toml v0.8.23
+  Downloaded pbkdf2 v0.12.2
+  Downloaded tracing-log v0.2.0
+  Downloaded parking v2.2.1
+  Downloaded rustls-webpki v0.103.13
+  Downloaded rustls-platform-verifier v0.5.3
+  Downloaded rust-embed-impl v8.7.2
+  Downloaded rustls-pki-types v1.12.0
+  Downloaded xrpl-rust-macros v0.1.0
+  Downloaded xdg-home v1.3.0
+  Downloaded yoke-derive v0.8.0
+  Downloaded scratch v1.0.9
+  Downloaded which v4.4.2
+  Downloaded wasm-opt-cxx-sys v0.116.0
+  Downloaded wasm-gen v0.1.4
+  Downloaded scrypt v0.11.0
+  Downloaded salsa20 v0.10.2
+  Downloaded is-wsl v0.4.0
+  Downloaded soroban-spec-rust v27.0.0-rc.1
+  Downloaded serde_repr v0.1.20
+  Downloaded quinn v0.11.9
+  Downloaded tracing-attributes v0.1.30
+  Downloaded is-docker v0.2.0
+  Downloaded smallvec v1.15.1
+  Downloaded serde_with_macros v3.21.0
+  Downloaded wasmi_arena v0.4.1
+  Downloaded blake2 v0.10.6
+  Downloaded zerofrom v0.1.6
+  Downloaded zerofrom-derive v0.1.6
+  Downloaded libm v0.2.15
+  Downloaded concurrent-queue v2.5.0
+  Downloaded signature v2.2.0
+  Downloaded serde_urlencoded v0.7.1
+  Downloaded sep5 v0.1.0
+  Downloaded sec1 v0.7.3
+  Downloaded schemars_derive v0.8.22
+  Downloaded tinyvec v1.10.0
+  Downloaded coins-bip32 v0.11.1
+  Downloaded rustls-native-certs v0.8.1
+  Downloaded zvariant_derive v4.2.0
+  Downloaded const-oid v0.9.6
+  Downloaded soroban-spec-typescript v27.0.0
+  Downloaded darling v0.20.11
+  Downloaded rpassword v7.4.0
+  Downloaded compression-codecs v0.4.30
+  Downloaded include_dir_macros v0.7.4
+  Downloaded ripemd v0.1.3
+  Downloaded whoami v1.6.1
+  Downloaded crossbeam-utils v0.8.21
+  Downloaded wasmi_core v0.13.0
+  Downloaded rand_xorshift v0.4.0
+  Downloaded rand_chacha v0.3.1
+  Downloaded proc-macro2 v1.0.106
+  Downloaded prettyplease v0.2.37
+  Downloaded lazy_static v1.5.0
+  Downloaded zmij v1.0.21
+  Downloaded zbus_macros v4.4.0
+  Downloaded h2 v0.4.12
+  Downloaded zerovec-derive v0.11.1
+  Downloaded zeroize v1.8.1
+  Downloaded serde_spanned v0.6.9
+  Downloaded tracing-core v0.1.34
+  Downloaded lock_api v0.4.13
+  Downloaded jobserver v0.1.34
+  Downloaded dbus-secret-service v4.1.0
+  Downloaded critical-section v1.2.0
+  Downloaded rand_core v0.6.4
+  Downloaded rtoolbox v0.0.3
+  Downloaded ref-cast-impl v1.0.24
+  Downloaded rand_hc v0.3.2
+  Downloaded anyhow v1.0.99
+  Downloaded zvariant_utils v2.1.0
+  Downloaded base64ct v1.8.0
+  Downloaded toml_edit v0.22.27
+  Downloaded password-hash v0.5.0
+  Downloaded futures-util v0.3.31
+  Downloaded yoke v0.8.0
+  Downloaded uuid v1.23.0
+  Downloaded rfc6979 v0.4.0
+  Downloaded radium v0.7.0
+  Downloaded once_cell v1.21.3
+  Downloaded mio v1.2.1
+  Downloaded ordered-float v2.10.1
+  Downloaded openssl-sys v0.9.109
+  Downloaded num-integer v0.1.46
+  Downloaded reqwest v0.12.23
+  Downloaded typenum v1.18.0
+  Downloaded codespan-reporting v0.12.0
+  Downloaded native-tls v0.2.14
+  Downloaded miniz_oxide v0.8.9
+  Downloaded hashbrown v0.15.5
+  Downloaded tracing v0.1.41
+  Downloaded rust_decimal v1.41.0
+  Downloaded ref-cast v1.0.24
+  Downloaded version_check v0.9.5
+  Downloaded quote v1.0.45
+  Downloaded primeorder v0.13.6
+  Downloaded ppv-lite86 v0.2.21
+  Downloaded powerfmt v0.2.0
+  Downloaded pkg-config v0.3.32
+  Downloaded paste v1.0.15
+  Downloaded polyval v0.6.2
+  Downloaded pin-utils v0.1.0
+  Downloaded phf_shared v0.11.3
+  Downloaded ctr v0.9.2
+  Downloaded cargo_metadata v0.18.1
+  Downloaded block-buffer v0.9.0
+  Downloaded proptest v1.11.0
+  Downloaded visibility v0.1.1
+  Downloaded utf8parse v0.2.2
+  Downloaded regex v1.11.2
+  Downloaded phf v0.11.3
+  Downloaded num-traits v0.2.19
+  Downloaded zeroize_derive v1.4.2
+  Downloaded nu-ansi-term v0.50.1
+  Downloaded async-broadcast v0.7.2
+  Downloaded ark-std v0.5.0
+  Downloaded hyper-util v0.1.16
+  Downloaded zbus_names v3.0.0
+  Downloaded zerotrie v0.2.2
+  Downloaded wasm-encoder v0.235.0
+  Downloaded darling v0.23.0
+  Downloaded soroban-wasmi v0.31.1-soroban.20.0.1
+  Downloaded signal-hook-registry v1.4.6
+  Downloaded sha2 v0.10.9
+  Downloaded http v1.4.2
+  Downloaded url v2.5.7
+  Downloaded clap v4.6.1
+  Downloaded clap_complete v4.5.57
+  Downloaded ed25519-dalek v2.2.0
+  Downloaded anstyle v1.0.14
+  Downloaded option-ext v0.2.0
+  Downloaded ows-core v1.2.4
+  Downloaded zvariant v4.2.0
+  Downloaded jsonrpsee-http-client v0.26.0
+  Downloaded unicode-segmentation v1.12.0
+  Downloaded snafu-derive v0.7.5
+  Downloaded tokio-util v0.7.16
+  Downloaded soroban-sdk v27.0.0-rc.1
+  Downloaded ark-ec v0.5.0
+  Downloaded base64 v0.22.1
+  Downloaded ark-ff v0.5.0
+  Downloaded serde_json v1.0.150
+  Downloaded darling_core v0.23.0
+  Downloaded cxxbridge-macro v1.0.179
+  Downloaded synstructure v0.13.2
+  Downloaded parking_lot_core v0.9.11
+  Downloaded nix v0.29.0
+  Downloaded parking_lot v0.12.4
+  Downloaded openssl v0.10.73
+  Downloaded const-hex v1.18.1
+  Downloaded link-cplusplus v1.0.12
+  Downloaded openssl-probe v0.1.6
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.0
+  Downloaded unicode-normalization v0.1.24
+  Downloaded wasmparser-nostd v0.100.2
+  Downloaded tower-http v0.6.6
+  Downloaded wyz v0.5.1
+  Downloaded writeable v0.6.1
+  Downloaded bytes v1.11.1
+  Downloaded walkdir v2.5.0
+  Downloaded bech32 v0.11.1
+  Downloaded tracing-appender v0.2.3
+  Downloaded serde_with v3.21.0
+  Downloaded stellar-ledger v27.0.0
+  Downloaded log v0.4.28
+  Downloaded flate2 v1.1.2
+  Downloaded signal-hook v0.4.4
+  Downloaded cargo-platform v0.1.9
+  Downloaded open v5.3.2
+  Downloaded num-complex v0.4.6
+  Downloaded no-std-compat v0.4.1
+  Downloaded keyring v3.6.3
+  Downloaded zerovec v0.11.4
+  Downloaded cc v1.2.36
+  Downloaded num-conv v0.2.0
+  Downloaded coins-bip39 v0.11.1
+  Downloaded litemap v0.8.0
+  Downloaded inout v0.1.4
+  Downloaded icu_collections v2.0.0
+  Downloaded stellar-strkey v0.0.16
+  Downloaded zbus v4.4.0
+  Downloaded p256 v0.13.2
+  Downloaded serde_core v1.0.228
+  Downloaded ryu v1.0.20
+  Downloaded unicode-ident v1.0.18
+  Downloaded arrayvec v0.7.6
+  Downloaded wasmparser v0.116.1
+  Downloaded crypto-bigint v0.5.5
+  Downloaded crossbeam-channel v0.5.15
+  Downloaded syn v1.0.109
+  Downloaded time v0.3.47
+  Downloaded soroban-cli v27.0.0
+  Downloaded ows-signer v1.2.4
+  Downloaded jsonrpsee-core v0.26.0
+  Downloaded base64 v0.21.7
+  Downloaded socket2 v0.5.10
+  Downloaded darling_core v0.20.11
+  Downloaded tracing-subscriber v0.3.20
+  Downloaded cxx-build v1.0.179
+  Downloaded vcpkg v0.2.15
+  Downloaded snafu v0.7.5
+  Downloaded k256 v0.13.4
+  Downloaded dbus v0.9.9
+  Downloaded ordered-stream v0.2.0
+  Downloaded indexmap v2.11.0
+  Downloaded schemars v0.9.0
+  Downloaded include_dir v0.7.4
+  Downloaded heapless v0.8.0
+  Downloaded futures v0.3.31
+  Downloaded darling_macro v0.23.0
+  Downloaded crypto-common v0.1.6
+  Downloaded icu_normalizer_data v2.0.0
+  Downloaded getrandom v0.4.2
+  Downloaded num-bigint v0.4.6
+  Downloaded zerocopy v0.8.27
+  Downloaded rustix v0.38.44
+  Downloaded rustls v0.23.31
+  Downloaded memchr v2.7.5
+  Downloaded itertools v0.10.5
+  Downloaded wasmparser v0.235.0
+  Downloaded unicode-width v0.2.1
+  Downloaded tiny-bip39 v2.0.0
+  Downloaded bigdecimal v0.4.10
+  Downloaded bollard v0.20.2
+  Downloaded tower v0.5.2
+  Downloaded num-derive v0.4.2
+  Downloaded rustix v1.0.8
+  Downloaded num v0.4.3
+  Downloaded clap_builder v4.6.0
+  Downloaded matchers v0.2.0
+  Downloaded iri-string v0.7.8
+  Downloaded icu_normalizer v2.0.0
+  Downloaded ethnum v1.5.3
+  Downloaded embassy-sync v0.6.2
+  Downloaded itertools v0.13.0
+  Downloaded cxxbridge-flags v1.0.179
+  Downloaded lru-slab v0.1.2
+  Downloaded leb128 v0.2.5
+  Downloaded indexmap v1.9.3
+  Downloaded iana-time-zone v0.1.63
+  Downloaded hmac v0.12.1
+  Downloaded futures-executor v0.3.31
+  Downloaded crate-git-revision v0.0.9
+  Downloaded httparse v1.10.1
+  Downloaded group v0.13.0
+  Downloaded glob v0.3.3
+  Downloaded foldhash v0.2.0
+  Downloaded fastrand v2.3.0
+  Downloaded ecdsa v0.16.9
+  Downloaded dyn-clone v1.0.20
+  Downloaded dotenvy v0.15.7
+  Downloaded leb128fmt v0.1.0
+  Downloaded indexmap-nostd v0.4.0
+  Downloaded bitvec v1.0.1
+  Downloaded hyper-tls v0.6.0
+  Downloaded chrono v0.4.42
+  Downloaded heck v0.4.1
+  Downloaded winnow v0.7.13
+  Downloaded cxx v1.0.179
+  Downloaded ghash v0.5.1
+  Downloaded endi v1.1.0
+  Downloaded embedded-io v0.6.1
+  Downloaded displaydoc v0.2.5
+  Downloaded dirs-sys v0.4.1
+  Downloaded cpufeatures v0.2.17
+  Downloaded block-padding v0.3.3
+  Downloaded http-body v1.0.1
+  Downloaded home v0.5.11
+  Downloaded quinn-proto v0.11.13
+  Downloaded heck v0.3.3
+  Downloaded hash32 v0.3.1
+  Downloaded generic-array v0.14.7
+  Downloaded futures-macro v0.3.31
+  Downloaded funty v2.0.0
+  Downloaded foldhash v0.1.5
+  Downloaded equivalent v1.0.2
+  Downloaded darling_macro v0.20.11
+  Downloaded curve25519-dalek-derive v0.1.1
+  Downloaded crate-git-revision v0.0.6
+  Downloaded compression-core v0.4.29
+  Downloaded webpki-roots v1.0.2
+  Downloaded curve25519-dalek v4.1.3
+  Downloaded regex-automata v0.4.10
+  Downloaded syn v2.0.118
+  Downloaded clap_lex v1.1.0
+  Downloaded cfg-if v1.0.3
+  Downloaded base16ct v0.2.0
+  Downloaded cfg_aliases v0.2.1
+  Downloaded bytesize v1.3.3
+  Downloaded arrayref v0.3.9
+  Downloaded regex-syntax v0.8.6
+  Downloaded downcast-rs v1.2.1
+  Downloaded hyperlocal v0.9.1
+  Downloaded hex-literal v0.4.1
+  Downloaded getrandom v0.3.3
+  Downloaded ark-bls12-381 v0.5.0
+  Downloaded futures-task v0.3.31
+  Downloaded futures-core v0.3.31
+  Downloaded foreign-types-shared v0.1.1
+  Downloaded find-msvc-tools v0.1.1
+  Downloaded enumflags2_derive v0.7.12
+  Downloaded enumflags2 v0.7.12
+  Downloaded either v1.15.0
+  Downloaded digest v0.10.7
+  Downloaded wasm-opt v0.116.1
+  Downloaded xrpl-rust v1.1.0
+  Downloaded digest v0.9.0
+  Downloaded derive_arbitrary v1.3.2
+  Downloaded byteorder v0.5.3
+  Downloaded icu_locale_core v2.0.0
+  Downloaded heck v0.5.0
+  Downloaded hashbrown v0.12.3
+  Downloaded event-listener-strategy v0.5.4
+  Downloaded doc-comment v0.3.3
+  Downloaded directories v5.0.1
+  Downloaded coins-core v0.11.1
+  Downloaded atomic-waker v1.1.2
+  Downloaded ark-serialize-derive v0.5.0
+  Downloaded fqdn v0.3.12
+  Downloaded soroban-env-host v27.0.0
+  Downloaded ff v0.13.1
+  Downloaded libc v0.2.186
+  Downloaded educe v0.6.0
+  Downloaded csv v1.3.1
+  Downloaded anstyle-query v1.1.4
+  Downloaded http-body-util v0.1.3
+  Downloaded futures-channel v0.3.31
+  Downloaded escape-bytes v0.1.1
+  Downloaded enum-ordinalize v4.3.2
+  Downloaded hex v0.4.3
+  Downloaded foreign-types v0.3.2
+  Downloaded fnv v1.0.7
+  Downloaded embedded-io-async v0.6.1
+  Downloaded embassy-futures v0.1.2
+  Downloaded ed25519 v2.2.3
+  Downloaded bollard-stubs v1.52.1-rc.29.1.3
+  Downloaded ark-poly v0.5.0
+  Downloaded ark-ff-asm v0.5.0
+  Downloaded anstream v1.0.0
+  Downloaded allocator-api2 v0.2.21
+  Downloaded aho-corasick v1.1.3
+  Downloaded ahash v0.8.12
+  Downloaded cipher v0.4.4
+  Downloaded bytes-lit v0.0.6
+  Downloaded block-buffer v0.10.4
+  Downloaded ark-ff-macros v0.5.0
+  Downloaded anstyle-parse v1.0.0
+  Downloaded aes-gcm v0.10.3
+  Downloaded ark-bn254 v0.5.0
+  Downloaded sha3 v0.10.8
+  Downloaded rust-embed v8.7.2
+  Downloaded tokio v1.52.3
+  Downloaded libdbus-sys v0.2.6
+  Downloaded encoding_rs v0.8.35
+  Downloaded stellar-xdr v27.0.0
+  Downloaded ring v0.17.14
+  Downloaded linux-raw-sys v0.4.15
+  Downloaded linux-raw-sys v0.9.4
+  Downloaded wasm-opt-sys v0.116.0
+  Downloaded secp256k1-sys v0.10.1
+   Compiling quote v1.0.45
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.18
+   Compiling libc v0.2.186
+   Compiling cfg-if v1.0.3
+   Compiling serde_core v1.0.228
+   Compiling version_check v0.9.5
+   Compiling typenum v1.18.0
+   Compiling generic-array v0.14.7
+   Compiling syn v2.0.118
+   Compiling getrandom v0.2.16
+   Compiling autocfg v1.5.0
+   Compiling rand_core v0.6.4
+   Compiling serde v1.0.228
+   Compiling subtle v2.6.1
+   Compiling zmij v1.0.21
+   Compiling const-oid v0.9.6
+   Compiling memchr v2.7.5
+   Compiling jobserver v0.1.34
+   Compiling find-msvc-tools v0.1.1
+   Compiling shlex v1.3.0
+   Compiling cc v1.2.36
+   Compiling serde_derive v1.0.228
+   Compiling zeroize_derive v1.4.2
+   Compiling serde_json v1.0.150
+   Compiling once_cell v1.21.3
+   Compiling zeroize v1.8.1
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling itoa v1.0.15
+   Compiling digest v0.10.7
+   Compiling equivalent v1.0.2
+   Compiling foldhash v0.1.5
+   Compiling allocator-api2 v0.2.21
+   Compiling smallvec v1.15.1
+   Compiling cpufeatures v0.2.17
+   Compiling num-traits v0.2.19
+   Compiling hashbrown v0.15.5
+   Compiling zerocopy v0.8.27
+   Compiling crate-git-revision v0.0.6
+   Compiling thiserror v1.0.69
+   Compiling ident_case v1.0.1
+   Compiling strsim v0.11.1
+   Compiling thiserror-impl v1.0.69
+   Compiling indexmap v2.11.0
+   Compiling sha2 v0.10.9
+   Compiling ppv-lite86 v0.2.21
+   Compiling pin-project-lite v0.2.16
+   Compiling darling_core v0.23.0
+   Compiling stable_deref_trait v1.2.0
+   Compiling futures-core v0.3.31
+   Compiling stellar-strkey v0.0.13
+   Compiling synstructure v0.13.2
+   Compiling bytes v1.11.1
+   Compiling base64 v0.22.1
+   Compiling darling_macro v0.23.0
+   Compiling semver v1.0.26
+   Compiling futures-sink v0.3.31
+   Compiling darling v0.23.0
+   Compiling serde_with_macros v3.21.0
+   Compiling heck v0.5.0
+   Compiling zerofrom-derive v0.1.6
+   Compiling hex v0.4.3
+   Compiling num-integer v0.1.46
+   Compiling lock_api v0.4.13
+   Compiling signal-hook-registry v1.4.6
+   Compiling parking_lot_core v0.9.11
+   Compiling getrandom v0.3.3
+   Compiling futures-io v0.3.31
+   Compiling zerofrom v0.1.6
+   Compiling yoke-derive v0.8.0
+   Compiling serde_derive_internals v0.29.1
+   Compiling scopeguard v1.2.0
+   Compiling pkg-config v0.3.32
+   Compiling utf8parse v0.2.2
+   Compiling slab v0.4.11
+   Compiling schemars v0.8.22
+   Compiling anstyle-parse v1.0.0
+   Compiling yoke v0.8.0
+   Compiling schemars_derive v0.8.22
+   Compiling num-bigint v0.4.6
+   Compiling futures-channel v0.3.31
+   Compiling hmac v0.12.1
+   Compiling cfg_eval v0.1.2
+   Compiling anstyle-query v1.1.4
+   Compiling anstyle v1.0.14
+   Compiling is_terminal_polyfill v1.70.1
+   Compiling dyn-clone v1.0.20
+   Compiling pin-utils v0.1.0
+   Compiling colorchoice v1.0.4
+   Compiling anstream v1.0.0
+   Compiling parking_lot v0.12.4
+   Compiling rand_chacha v0.3.1
+   Compiling futures-macro v0.3.31
+   Compiling zerovec-derive v0.11.1
+   Compiling tokio-macros v2.7.0
+   Compiling socket2 v0.6.4
+   Compiling mio v1.2.1
+   Compiling clap_lex v1.1.0
+   Compiling futures-task v0.3.31
+   Compiling futures-util v0.3.31
+   Compiling clap_builder v4.6.0
+   Compiling tokio v1.52.3
+   Compiling zerovec v0.11.4
+   Compiling rand v0.8.5
+   Compiling serde_with v3.21.0
+   Compiling clap_derive v4.6.1
+   Compiling der v0.7.10
+   Compiling displaydoc v0.2.5
+   Compiling clap v4.6.1
+   Compiling rand_core v0.9.3
+   Compiling signature v2.2.0
+   Compiling log v0.4.28
+   Compiling either v1.15.0
+   Compiling data-encoding v2.9.0
+   Compiling rand_chacha v0.9.0
+   Compiling spki v0.7.3
+   Compiling rustc_version v0.4.1
+   Compiling http v1.4.2
+   Compiling crypto-bigint v0.5.5
+   Compiling tracing-core v0.1.34
+   Compiling ff v0.13.1
+   Compiling paste v1.0.15
+   Compiling arrayvec v0.7.6
+   Compiling base16ct v0.2.0
+   Compiling syn v1.0.109
+   Compiling sec1 v0.7.3
+   Compiling group v0.13.0
+   Compiling pkcs8 v0.10.2
+   Compiling rand v0.9.2
+   Compiling tinystr v0.8.1
+   Compiling stellar-xdr v27.0.0
+   Compiling derive_arbitrary v1.3.2
+   Compiling tracing-attributes v0.1.30
+   Compiling libm v0.2.15
+   Compiling byteorder v1.5.0
+   Compiling percent-encoding v2.3.2
+   Compiling writeable v0.6.1
+   Compiling litemap v0.8.0
+   Compiling icu_locale_core v2.0.0
+   Compiling tracing v0.1.41
+   Compiling arbitrary v1.3.2
+   Compiling elliptic-curve v0.13.8
+   Compiling zerotrie v0.2.2
+   Compiling potential_utf v0.1.3
+   Compiling icu_normalizer_data v2.0.0
+   Compiling escape-bytes v0.1.1
+   Compiling fnv v1.0.7
+   Compiling heapless v0.8.0
+   Compiling ethnum v1.5.3
+   Compiling icu_properties_data v2.0.1
+   Compiling icu_collections v2.0.0
+   Compiling icu_provider v2.0.0
+   Compiling hash32 v0.3.1
+   Compiling http-body v1.0.1
+   Compiling curve25519-dalek v4.1.3
+   Compiling rfc6979 v0.4.0
+   Compiling enum-ordinalize-derive v4.3.2
+   Compiling enum-ordinalize v4.3.2
+   Compiling ecdsa v0.16.9
+   Compiling ark-std v0.5.0
+   Compiling block-padding v0.3.3
+   Compiling ring v0.17.14
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling ark-serialize-derive v0.5.0
+   Compiling ahash v0.8.12
+   Compiling keccak v0.1.6
+   Compiling prettyplease v0.2.37
+   Compiling rustversion v1.0.22
+   Compiling tower-service v0.3.3
+   Compiling bitflags v2.11.0
+   Compiling httparse v1.10.1
+   Compiling itertools v0.13.0
+   Compiling sha3 v0.10.8
+   Compiling ark-serialize v0.5.0
+   Compiling inout v0.1.4
+   Compiling icu_properties v2.0.1
+   Compiling icu_normalizer v2.0.0
+   Compiling educe v0.6.0
+   Compiling ark-ff-macros v0.5.0
+   Compiling wasmparser v0.116.1
+   Compiling ed25519 v2.2.3
+   Compiling tokio-util v0.7.16
+   Compiling rustls-pki-types v1.12.0
+   Compiling ark-ff-asm v0.5.0
+   Compiling vcpkg v0.2.15
+   Compiling thiserror v2.0.18
+   Compiling atomic-waker v1.1.2
+   Compiling try-lock v0.2.5
+   Compiling anyhow v1.0.99
+   Compiling want v0.3.1
+   Compiling h2 v0.4.12
+   Compiling openssl-sys v0.9.109
+   Compiling ark-ff v0.5.0
+   Compiling ed25519-dalek v2.2.0
+   Compiling idna_adapter v1.2.1
+   Compiling cipher v0.4.4
+   Compiling k256 v0.13.4
+   Compiling form_urlencoded v1.2.2
+   Compiling stellar-strkey v0.0.16
+   Compiling thiserror-impl v2.0.18
+   Compiling httpdate v1.0.3
+   Compiling scratch v1.0.9
+   Compiling utf8_iter v1.0.4
+   Compiling untrusted v0.9.0
+   Compiling ark-poly v0.5.0
+   Compiling idna v1.1.0
+   Compiling hyper v1.7.0
+   Compiling soroban-env-macros v27.0.0
+   Compiling link-cplusplus v1.0.12
+   Compiling num-derive v0.4.2
+   Compiling aho-corasick v1.1.3
+   Compiling socket2 v0.5.10
+   Compiling ipnet v2.11.0
+   Compiling regex-syntax v0.8.6
+   Compiling termcolor v1.4.1
+   Compiling openssl-probe v0.1.6
+   Compiling rustls v0.23.31
+   Compiling unicode-width v0.2.1
+   Compiling indexmap-nostd v0.4.0
+   Compiling downcast-rs v1.2.1
+   Compiling wasmi_core v0.13.0
+   Compiling wasmparser-nostd v0.100.2
+   Compiling codespan-reporting v0.12.0
+   Compiling regex-automata v0.4.10
+   Compiling hyper-util v0.1.16
+   Compiling url v2.5.7
+   Compiling ark-ec v0.5.0
+   Compiling rustls-webpki v0.103.13
+   Compiling http-body-util v0.1.3
+   Compiling soroban-env-common v27.0.0
+   Compiling crate-git-revision v0.0.9
+   Compiling wasmi_arena v0.4.1
+   Compiling spin v0.9.8
+   Compiling heck v0.4.1
+   Compiling cxxbridge-flags v1.0.179
+   Compiling cxx v1.0.179
+   Compiling soroban-wasmi v0.31.1-soroban.20.0.1
+   Compiling darling_core v0.20.11
+   Compiling cxx-build v1.0.179
+   Compiling primeorder v0.13.6
+   Compiling sync_wrapper v1.0.2
+   Compiling doc-comment v0.3.3
+   Compiling static_assertions v1.1.0
+   Compiling base64 v0.21.7
+   Compiling tower-layer v0.3.3
+   Compiling soroban-env-host v27.0.0
+   Compiling openssl v0.10.73
+   Compiling opaque-debug v0.3.1
+   Compiling foreign-types-shared v0.1.1
+   Compiling iana-time-zone v0.1.63
+   Compiling chrono v0.4.42
+   Compiling foreign-types v0.3.2
+   Compiling tower v0.5.2
+   Compiling soroban-spec v27.0.0-rc.1
+   Compiling p256 v0.13.2
+   Compiling darling_macro v0.20.11
+   Compiling ark-bn254 v0.5.0
+   Compiling ark-bls12-381 v0.5.0
+   Compiling soroban-builtin-sdk-macros v27.0.0
+   Compiling bs58 v0.5.1
+   Compiling ripemd v0.1.3
+   Compiling secp256k1-sys v0.10.1
+   Compiling serde_repr v0.1.20
+   Compiling async-trait v0.1.89
+   Compiling openssl-macros v0.1.1
+   Compiling lazy_static v1.5.0
+   Compiling hex-literal v0.4.1
+   Compiling radium v0.7.0
+   Compiling native-tls v0.2.14
+   Compiling embedded-io-async v0.6.1
+   Compiling getrandom v0.4.2
+   Compiling darling v0.20.11
+   Compiling soroban-spec-rust v27.0.0-rc.1
+   Compiling wasm-opt-sys v0.116.0
+   Compiling tokio-rustls v0.26.2
+   Compiling snafu-derive v0.7.5
+   Compiling soroban-sdk v27.0.0-rc.1
+   Compiling aes v0.8.4
+   Compiling webpki-roots v1.0.2
+   Compiling pbkdf2 v0.12.2
+   Compiling libdbus-sys v0.2.6
+   Compiling const-hex v1.18.1
+   Compiling universal-hash v0.5.1
+   Compiling macro-string v0.1.4
+   Compiling bigdecimal v0.4.10
+   Compiling crc32fast v1.5.0
+   Compiling bech32 v0.9.1
+   Compiling tap v1.0.1
+   Compiling embassy-sync v0.6.2
+   Compiling ryu v1.0.20
+   Compiling rust_decimal v1.41.0
+   Compiling embedded-io v0.6.1
+   Compiling wyz v0.5.1
+   Compiling coins-core v0.11.1
+   Compiling soroban-sdk-macros v27.0.0-rc.1
+   Compiling polyval v0.6.2
+   Compiling hyper-rustls v0.27.7
+   Compiling snafu v0.7.5
+   Compiling regex v1.11.2
+   Compiling cxxbridge-macro v1.0.179
+   Compiling thiserror-impl-no-std v2.0.2
+   Compiling bytes-lit v0.0.6
+   Compiling hkdf v0.12.4
+   Compiling hidapi v1.5.0
+   Compiling visibility v0.1.1
+   Compiling pin-project-internal v1.1.10
+   Compiling adler2 v2.0.1
+   Compiling same-file v1.0.6
+   Compiling base64ct v1.8.0
+   Compiling funty v2.0.0
+   Compiling rustix v1.0.8
+   Compiling arrayref v0.3.9
+   Compiling signal-hook v0.4.4
+   Compiling foldhash v0.2.0
+   Compiling siphasher v1.0.1
+   Compiling no-std-compat v0.4.1
+   Compiling fastrand v2.3.0
+   Compiling critical-section v1.2.0
+   Compiling crossbeam-utils v0.8.21
+   Compiling tinyvec_macros v0.1.1
+   Compiling tinyvec v1.10.0
+   Compiling ledger-apdu v0.10.0
+   Compiling phf_shared v0.11.3
+   Compiling bitvec v1.0.1
+   Compiling password-hash v0.5.0
+   Compiling walkdir v2.5.0
+   Compiling miniz_oxide v0.8.9
+   Compiling pin-project v1.1.10
+error: failed to run custom build command for `hidapi v1.5.0`
+
+Caused by:
+  process didn't exit successfully: `/tmp/cargo-installC0435F/release/build/hidapi-9a69ca5baf0fd7c3/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-env-changed=LIBUDEV_NO_PKG_CONFIG
+  cargo:rerun-if-env-changed=PKG_CONFIG_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG
+  cargo:rerun-if-env-changed=PKG_CONFIG
+  cargo:rerun-if-env-changed=LIBUDEV_STATIC
+  cargo:rerun-if-env-changed=LIBUDEV_DYNAMIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_ALL_STATIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_ALL_DYNAMIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_PATH
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_LIBDIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_SYSROOT_DIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR
+
+  --- stderr
+
+  thread 'main' (8323) panicked at /home/wdecoded92/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hidapi-1.5.0/build.rs:57:54:
+  Unable to find libudev: 
+  pkg-config exited with status code 1
+  > PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 pkg-config --libs --cflags libudev
+
+  The system library `libudev` required by crate `hidapi` was not found.
+  The file `libudev.pc` needs to be installed and the PKG_CONFIG_PATH environment variable must contain its parent directory.
+  The PKG_CONFIG_PATH environment variable is not set.
+
+  HINT: if you have installed the library, try setting PKG_CONFIG_PATH to the directory containing `libudev.pc`.
+
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+warning: build failed, waiting for other jobs to finish...
+
+[1m╔══════════════════════════════════════════════════════════════════╗[0m
+[1m║  BatchGuard ZK — GATE 1 Soroban ZK Verifier Spike              ║[0m
+[1m║  Loop: technical_spike_repair  Max attempts: 3                 ║[0m
+[1m╚══════════════════════════════════════════════════════════════════╝[0m
+
+Start: 2026-07-01T15:14:15Z
+Host:  cs-754928739639-default
+User:  wdecoded92
+Log:   /home/wdecoded92/batchguard-zk-gate1/evidence/cloudshell-run.log (this output is already being captured if you piped to tee)
+
+
+[0;36m[1m▶ STEP: 0. Pre-flight sanity: Docker[0m
+
+[0;32m[OK][0m Docker: Docker version 29.6.1, build 8900f1d
+
+[0;36m[1m▶ STEP: 1. Rust toolchain — rustup[0m
+
+[0;32m[OK][0m rustup already present: rustup 1.26.0 (2026-04-20)
+[0;32m[OK][0m rustc: rustc 1.96.1 (31fca3adb 2026-06-26)
+[0;32m[OK][0m cargo: cargo 1.96.1 (356927216 2026-06-26)
+
+[0;36m[1m▶ STEP: 2. WASM targets[0m
+
+info: component 'rust-std' for target 'wasm32v1-none' is up to date
+[0;32m[OK][0m wasm32v1-none added
+info: component 'rust-std' for target 'wasm32-unknown-unknown' is up to date
+[0;32m[OK][0m wasm32-unknown-unknown added
+
+[0;36m[1m▶ STEP: 3. stellar-cli[0m
+
+[0;32m[OK][0m stellar not found — installing via cargo
+    Updating crates.io index
+  Installing stellar-cli v27.0.0
+    Updating crates.io index
+    Updating crates.io index
+   Compiling quote v1.0.45
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.18
+   Compiling libc v0.2.186
+   Compiling cfg-if v1.0.3
+   Compiling serde_core v1.0.228
+   Compiling version_check v0.9.5
+   Compiling typenum v1.18.0
+   Compiling syn v2.0.118
+   Compiling generic-array v0.14.7
+   Compiling getrandom v0.2.16
+   Compiling autocfg v1.5.0
+   Compiling rand_core v0.6.4
+   Compiling serde v1.0.228
+   Compiling subtle v2.6.1
+   Compiling zmij v1.0.21
+   Compiling const-oid v0.9.6
+   Compiling memchr v2.7.5
+   Compiling jobserver v0.1.34
+   Compiling find-msvc-tools v0.1.1
+   Compiling shlex v1.3.0
+   Compiling cc v1.2.36
+   Compiling serde_derive v1.0.228
+   Compiling zeroize_derive v1.4.2
+   Compiling serde_json v1.0.150
+   Compiling once_cell v1.21.3
+   Compiling zeroize v1.8.1
+   Compiling equivalent v1.0.2
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling itoa v1.0.15
+   Compiling digest v0.10.7
+   Compiling foldhash v0.1.5
+   Compiling allocator-api2 v0.2.21
+   Compiling hashbrown v0.15.5
+   Compiling smallvec v1.15.1
+   Compiling cpufeatures v0.2.17
+   Compiling crate-git-revision v0.0.6
+   Compiling num-traits v0.2.19
+   Compiling zerocopy v0.8.27
+   Compiling thiserror v1.0.69
+   Compiling indexmap v2.11.0
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling thiserror-impl v1.0.69
+   Compiling ppv-lite86 v0.2.21
+   Compiling sha2 v0.10.9
+   Compiling pin-project-lite v0.2.16
+   Compiling darling_core v0.23.0
+   Compiling stable_deref_trait v1.2.0
+   Compiling futures-core v0.3.31
+   Compiling stellar-strkey v0.0.13
+   Compiling synstructure v0.13.2
+   Compiling heck v0.5.0
+   Compiling futures-sink v0.3.31
+   Compiling semver v1.0.26
+   Compiling darling_macro v0.23.0
+   Compiling base64 v0.22.1
+   Compiling darling v0.23.0
+   Compiling serde_with_macros v3.21.0
+   Compiling bytes v1.11.1
+   Compiling zerofrom-derive v0.1.6
+   Compiling num-integer v0.1.46
+   Compiling hex v0.4.3
+   Compiling lock_api v0.4.13
+   Compiling signal-hook-registry v1.4.6
+   Compiling futures-io v0.3.31
+   Compiling getrandom v0.3.3
+   Compiling parking_lot_core v0.9.11
+   Compiling zerofrom v0.1.6
+   Compiling yoke-derive v0.8.0
+   Compiling serde_derive_internals v0.29.1
+   Compiling scopeguard v1.2.0
+   Compiling schemars v0.8.22
+   Compiling utf8parse v0.2.2
+   Compiling pkg-config v0.3.32
+   Compiling slab v0.4.11
+   Compiling schemars_derive v0.8.22
+   Compiling yoke v0.8.0
+   Compiling anstyle-parse v1.0.0
+   Compiling num-bigint v0.4.6
+   Compiling futures-channel v0.3.31
+   Compiling hmac v0.12.1
+   Compiling cfg_eval v0.1.2
+   Compiling pin-utils v0.1.0
+   Compiling anstyle-query v1.1.4
+   Compiling anstyle v1.0.14
+   Compiling dyn-clone v1.0.20
+   Compiling is_terminal_polyfill v1.70.1
+   Compiling colorchoice v1.0.4
+   Compiling anstream v1.0.0
+   Compiling parking_lot v0.12.4
+   Compiling rand_chacha v0.3.1
+   Compiling zerovec-derive v0.11.1
+   Compiling futures-macro v0.3.31
+   Compiling tokio-macros v2.7.0
+   Compiling mio v1.2.1
+   Compiling socket2 v0.6.4
+   Compiling futures-task v0.3.31
+   Compiling clap_lex v1.1.0
+   Compiling clap_builder v4.6.0
+   Compiling futures-util v0.3.31
+   Compiling tokio v1.52.3
+   Compiling zerovec v0.11.4
+   Compiling rand v0.8.5
+   Compiling serde_with v3.21.0
+   Compiling clap_derive v4.6.1
+   Compiling der v0.7.10
+   Compiling displaydoc v0.2.5
+   Compiling clap v4.6.1
+   Compiling rand_core v0.9.3
+   Compiling signature v2.2.0
+   Compiling log v0.4.28
+   Compiling either v1.15.0
+   Compiling data-encoding v2.9.0
+   Compiling rand_chacha v0.9.0
+   Compiling spki v0.7.3
+   Compiling rustc_version v0.4.1
+   Compiling http v1.4.2
+   Compiling crypto-bigint v0.5.5
+   Compiling tracing-core v0.1.34
+   Compiling ff v0.13.1
+   Compiling syn v1.0.109
+   Compiling base16ct v0.2.0
+   Compiling arrayvec v0.7.6
+   Compiling paste v1.0.15
+   Compiling sec1 v0.7.3
+   Compiling group v0.13.0
+   Compiling pkcs8 v0.10.2
+   Compiling rand v0.9.2
+   Compiling tinystr v0.8.1
+   Compiling stellar-xdr v27.0.0
+   Compiling derive_arbitrary v1.3.2
+   Compiling tracing-attributes v0.1.30
+   Compiling libm v0.2.15
+   Compiling byteorder v1.5.0
+   Compiling litemap v0.8.0
+   Compiling writeable v0.6.1
+   Compiling percent-encoding v2.3.2
+   Compiling icu_locale_core v2.0.0
+   Compiling arbitrary v1.3.2
+   Compiling tracing v0.1.41
+   Compiling elliptic-curve v0.13.8
+   Compiling zerotrie v0.2.2
+   Compiling potential_utf v0.1.3
+   Compiling heapless v0.8.0
+   Compiling ethnum v1.5.3
+   Compiling escape-bytes v0.1.1
+   Compiling icu_normalizer_data v2.0.0
+   Compiling fnv v1.0.7
+   Compiling icu_properties_data v2.0.1
+   Compiling icu_provider v2.0.0
+   Compiling icu_collections v2.0.0
+   Compiling hash32 v0.3.1
+   Compiling http-body v1.0.1
+   Compiling curve25519-dalek v4.1.3
+   Compiling rfc6979 v0.4.0
+   Compiling enum-ordinalize-derive v4.3.2
+   Compiling enum-ordinalize v4.3.2
+   Compiling ecdsa v0.16.9
+   Compiling ark-std v0.5.0
+   Compiling block-padding v0.3.3
+   Compiling ring v0.17.14
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling ark-serialize-derive v0.5.0
+   Compiling ahash v0.8.12
+   Compiling bitflags v2.11.0
+   Compiling tower-service v0.3.3
+   Compiling httparse v1.10.1
+   Compiling prettyplease v0.2.37
+   Compiling keccak v0.1.6
+   Compiling rustversion v1.0.22
+   Compiling sha3 v0.10.8
+   Compiling itertools v0.13.0
+   Compiling ark-serialize v0.5.0
+   Compiling inout v0.1.4
+   Compiling icu_properties v2.0.1
+   Compiling icu_normalizer v2.0.0
+   Compiling educe v0.6.0
+   Compiling ark-ff-macros v0.5.0
+   Compiling wasmparser v0.116.1
+   Compiling ed25519 v2.2.3
+   Compiling tokio-util v0.7.16
+   Compiling rustls-pki-types v1.12.0
+   Compiling ark-ff-asm v0.5.0
+   Compiling atomic-waker v1.1.2
+   Compiling thiserror v2.0.18
+   Compiling vcpkg v0.2.15
+   Compiling try-lock v0.2.5
+   Compiling anyhow v1.0.99
+   Compiling want v0.3.1
+   Compiling openssl-sys v0.9.109
+   Compiling h2 v0.4.12
+   Compiling ark-ff v0.5.0
+   Compiling ed25519-dalek v2.2.0
+   Compiling idna_adapter v1.2.1
+   Compiling cipher v0.4.4
+   Compiling k256 v0.13.4
+   Compiling form_urlencoded v1.2.2
+   Compiling stellar-strkey v0.0.16
+   Compiling thiserror-impl v2.0.18
+   Compiling scratch v1.0.9
+   Compiling httpdate v1.0.3
+   Compiling utf8_iter v1.0.4
+   Compiling untrusted v0.9.0
+   Compiling idna v1.1.0
+   Compiling hyper v1.7.0
+   Compiling ark-poly v0.5.0
+   Compiling soroban-env-macros v27.0.0
+   Compiling link-cplusplus v1.0.12
+   Compiling num-derive v0.4.2
+   Compiling aho-corasick v1.1.3
+   Compiling socket2 v0.5.10
+   Compiling regex-syntax v0.8.6
+   Compiling downcast-rs v1.2.1
+   Compiling indexmap-nostd v0.4.0
+   Compiling ipnet v2.11.0
+   Compiling rustls v0.23.31
+   Compiling openssl-probe v0.1.6
+   Compiling termcolor v1.4.1
+   Compiling unicode-width v0.2.1
+   Compiling codespan-reporting v0.12.0
+   Compiling hyper-util v0.1.16
+   Compiling wasmparser-nostd v0.100.2
+   Compiling wasmi_core v0.13.0
+   Compiling regex-automata v0.4.10
+   Compiling ark-ec v0.5.0
+   Compiling rustls-webpki v0.103.13
+   Compiling url v2.5.7
+   Compiling http-body-util v0.1.3
+   Compiling soroban-env-common v27.0.0
+   Compiling crate-git-revision v0.0.9
+   Compiling spin v0.9.8
+   Compiling wasmi_arena v0.4.1
+   Compiling cxxbridge-flags v1.0.179
+   Compiling heck v0.4.1
+   Compiling cxx v1.0.179
+   Compiling darling_core v0.20.11
+   Compiling soroban-wasmi v0.31.1-soroban.20.0.1
+   Compiling cxx-build v1.0.179
+   Compiling primeorder v0.13.6
+   Compiling sync_wrapper v1.0.2
+   Compiling base64 v0.21.7
+   Compiling openssl v0.10.73
+   Compiling doc-comment v0.3.3
+   Compiling opaque-debug v0.3.1
+   Compiling foreign-types-shared v0.1.1
+   Compiling tower-layer v0.3.3
+   Compiling soroban-env-host v27.0.0
+   Compiling iana-time-zone v0.1.63
+   Compiling static_assertions v1.1.0
+   Compiling soroban-spec v27.0.0-rc.1
+   Compiling chrono v0.4.42
+   Compiling tower v0.5.2
+   Compiling foreign-types v0.3.2
+   Compiling p256 v0.13.2
+   Compiling darling_macro v0.20.11
+   Compiling ark-bn254 v0.5.0
+   Compiling ark-bls12-381 v0.5.0
+   Compiling soroban-builtin-sdk-macros v27.0.0
+   Compiling bs58 v0.5.1
+   Compiling ripemd v0.1.3
+   Compiling secp256k1-sys v0.10.1
+   Compiling async-trait v0.1.89
+   Compiling serde_repr v0.1.20
+   Compiling openssl-macros v0.1.1
+   Compiling hex-literal v0.4.1
+   Compiling radium v0.7.0
+   Compiling getrandom v0.4.2
+   Compiling native-tls v0.2.14
+   Compiling lazy_static v1.5.0
+   Compiling embedded-io-async v0.6.1
+   Compiling darling v0.20.11
+   Compiling soroban-spec-rust v27.0.0-rc.1
+   Compiling wasm-opt-sys v0.116.0
+   Compiling tokio-rustls v0.26.2
+   Compiling snafu-derive v0.7.5
+   Compiling soroban-sdk v27.0.0-rc.1
+   Compiling aes v0.8.4
+   Compiling webpki-roots v1.0.2
+   Compiling pbkdf2 v0.12.2
+   Compiling libdbus-sys v0.2.6
+   Compiling const-hex v1.18.1
+   Compiling universal-hash v0.5.1
+   Compiling macro-string v0.1.4
+   Compiling bigdecimal v0.4.10
+   Compiling embassy-sync v0.6.2
+   Compiling crc32fast v1.5.0
+   Compiling tap v1.0.1
+   Compiling rust_decimal v1.41.0
+   Compiling bech32 v0.9.1
+   Compiling ryu v1.0.20
+   Compiling embedded-io v0.6.1
+   Compiling coins-core v0.11.1
+   Compiling wyz v0.5.1
+   Compiling soroban-sdk-macros v27.0.0-rc.1
+   Compiling polyval v0.6.2
+   Compiling hyper-rustls v0.27.7
+   Compiling snafu v0.7.5
+   Compiling regex v1.11.2
+   Compiling cxxbridge-macro v1.0.179
+   Compiling bytes-lit v0.0.6
+   Compiling thiserror-impl-no-std v2.0.2
+   Compiling hkdf v0.12.4
+   Compiling hidapi v1.5.0
+   Compiling visibility v0.1.1
+   Compiling pin-project-internal v1.1.10
+   Compiling fastrand v2.3.0
+   Compiling no-std-compat v0.4.1
+   Compiling siphasher v1.0.1
+   Compiling adler2 v2.0.1
+   Compiling foldhash v0.2.0
+   Compiling same-file v1.0.6
+   Compiling signal-hook v0.4.4
+   Compiling crossbeam-utils v0.8.21
+   Compiling base64ct v1.8.0
+   Compiling rustix v1.0.8
+   Compiling arrayref v0.3.9
+   Compiling funty v2.0.0
+   Compiling critical-section v1.2.0
+   Compiling tinyvec_macros v0.1.1
+   Compiling tinyvec v1.10.0
+   Compiling bitvec v1.0.1
+   Compiling ledger-apdu v0.10.0
+   Compiling password-hash v0.5.0
+   Compiling walkdir v2.5.0
+   Compiling miniz_oxide v0.8.9
+   Compiling phf_shared v0.11.3
+   Compiling pin-project v1.1.10
+   Compiling thiserror-no-std v2.0.2
+   Compiling uuid v1.23.0
+   Compiling tokio-native-tls v0.3.1
+   Compiling secp256k1 v0.30.0
+   Compiling ghash v0.5.1
+   Compiling coins-bip32 v0.11.1
+   Compiling serde_urlencoded v0.7.1
+   Compiling wasm-opt-cxx-sys v0.116.0
+   Compiling rustls-native-certs v0.8.1
+   Compiling jsonrpsee-types v0.26.0
+   Compiling strum_macros v0.26.4
+   Compiling ctr v0.9.2
+   Compiling salsa20 v0.10.2
+   Compiling itertools v0.10.5
+   Compiling num-rational v0.4.2
+   Compiling num-iter v0.1.45
+   Compiling num-complex v0.4.6
+   Compiling ordered-float v2.10.1
+   Compiling aead v0.5.2
+   Compiling derive-new v0.7.0
+   Compiling xrpl-rust-macros v0.1.0
+   Compiling rand_hc v0.3.2
+   Compiling powerfmt v0.2.0
+   Compiling iri-string v0.7.8
+   Compiling camino v1.1.12
+   Compiling rustix v0.38.44
+   Compiling wasm-encoder v0.235.0
+   Compiling strum v0.26.3
+   Compiling embassy-futures v0.1.2
+   Compiling linux-raw-sys v0.9.4
+   Compiling xrpl-rust v1.1.0
+   Compiling tower-http v0.6.6
+   Compiling deranged v0.5.3
+   Compiling aes-gcm v0.10.3
+   Compiling serde-value v0.7.0
+   Compiling num v0.4.3
+   Compiling scrypt v0.11.0
+   Compiling jsonrpsee-core v0.26.0
+   Compiling rustls-platform-verifier v0.5.3
+   Compiling coins-bip39 v0.11.1
+   Compiling flate2 v1.1.2
+   Compiling dbus v0.9.9
+   Compiling hyper-tls v0.6.0
+   Compiling ows-core v1.2.4
+   Compiling soroban-token-sdk v27.0.0-rc.1
+   Compiling phf_generator v0.11.3
+   Compiling rust-embed-utils v8.7.2
+   Compiling ledger-transport v0.10.0
+   Compiling unicode-normalization v0.1.24
+   Compiling sharded-slab v0.1.7
+   Compiling bollard-stubs v1.52.1-rc.29.1.3
+   Compiling hyperlocal v0.9.1
+   Compiling matchers v0.2.0
+   Compiling cbc v0.1.2
+   Compiling tracing-log v0.2.0
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling blake2 v0.10.6
+   Compiling block-buffer v0.9.0
+   Compiling digest v0.9.0
+   Compiling is-docker v0.2.0
+   Compiling include_dir_macros v0.7.4
+   Compiling thread_local v1.1.9
+   Compiling encoding_rs v0.8.35
+   Compiling time-core v0.1.8
+   Compiling bech32 v0.11.1
+   Compiling linux-raw-sys v0.4.15
+   Compiling home v0.5.11
+   Compiling compression-core v0.4.29
+   Compiling option-ext v0.2.0
+   Compiling winnow v0.7.13
+   Compiling nu-ansi-term v0.50.1
+   Compiling rustc-hash v1.1.0
+   Compiling toml_write v0.1.2
+   Compiling num-conv v0.2.0
+   Compiling mime v0.3.17
+   Compiling unicode-segmentation v1.12.0
+   Compiling leb128fmt v0.1.0
+   Compiling termcolor_output_impl v1.0.0
+   Compiling glob v0.3.3
+   Compiling include_dir v0.7.4
+   Compiling termcolor_output v1.0.1
+   Compiling heck v0.3.3
+   Compiling reqwest v0.12.23
+   Compiling time v0.3.47
+   Compiling toml_edit v0.22.27
+   Compiling tiny-bip39 v2.0.0
+   Compiling tracing-subscriber v0.3.20
+   Compiling dirs-sys v0.4.1
+   Compiling compression-codecs v0.4.30
+   Compiling ows-signer v1.2.4
+   Compiling is-wsl v0.4.0
+   Compiling sha2 v0.9.9
+   Compiling dbus-secret-service v4.1.0
+   Compiling bollard v0.20.2
+   Compiling ledger-transport-hid v0.10.0
+   Compiling crossbeam-channel v0.5.15
+   Compiling rust-embed-impl v8.7.2
+   Compiling phf_macros v0.11.3
+   Compiling soroban-token-spec v27.0.0-rc.1
+   Compiling jsonrpsee-http-client v0.26.0
+   Compiling serde-aux v4.7.0
+   Compiling tempfile v3.21.0
+   Compiling strum_macros v0.24.3
+   Compiling soroban-cli v27.0.0
+   Compiling futures-executor v0.3.31
+   Compiling cargo-platform v0.1.9
+   Compiling csv-core v0.1.12
+   Compiling rtoolbox v0.0.3
+   Compiling byteorder v0.5.3
+   Compiling strum v0.24.1
+   Compiling pathdiff v0.2.3
+   Compiling leb128 v0.2.5
+   Compiling wasm-gen v0.1.4
+   Compiling open v5.3.2
+   Compiling soroban-spec-typescript v27.0.0
+   Compiling rpassword v7.4.0
+   Compiling csv v1.3.1
+   Compiling cargo_metadata v0.18.1
+   Compiling futures v0.3.31
+   Compiling rust-embed v8.7.2
+   Compiling stellar-rpc-client v27.0.0
+   Compiling stellar-asset-spec v27.0.0-rc.1
+   Compiling phf v0.11.3
+   Compiling tracing-appender v0.2.3
+   Compiling stellar-ledger v27.0.0
+   Compiling keyring v3.6.3
+   Compiling sep5 v0.1.0
+   Compiling which v4.4.2
+   Compiling async-compression v0.4.30
+   Compiling directories v5.0.1
+   Compiling toml v0.8.23
+   Compiling strum_macros v0.17.1
+   Compiling soroban-spec-tools v27.0.0
+   Compiling soroban-ledger-snapshot v27.0.0-rc.1
+   Compiling ulid v1.2.1
+   Compiling clap_complete v4.5.57
+   Compiling whoami v1.6.1
+   Compiling shell-escape v0.1.5
+   Compiling fqdn v0.3.12
+   Compiling dotenvy v0.15.7
+   Compiling strum v0.17.1
+   Compiling humantime v2.2.0
+   Compiling bytesize v1.3.3
+   Compiling wasm-opt v0.116.1
+   Compiling stellar-cli v27.0.0
+    Finished `release` profile [optimized] target(s) in 23m 51s
+  Installing /home/wdecoded92/.cargo/bin/stellar
+   Installed package `stellar-cli v27.0.0` (executable `stellar`)
+[0;32m[OK][0m stellar-cli: ./scripts/run_gate1_cloudshell.sh: line 118: stellar: command not found
+
+[0;36m[1m▶ STEP: 4. just (task runner)[0m
+
+[0;32m[OK][0m just not found — installing via cargo
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded just v1.55.1
+  Installing just v1.55.1
+    Updating crates.io index
+     Locking 136 packages to latest compatible versions
+      Adding clap_complete v4.6.5 (available: v4.6.6)
+ Downloading crates ...
+  Downloaded autocfg v1.5.1
+  Downloaded arrayvec v0.7.7
+  Downloaded anstyle-query v1.1.5
+  Downloaded cfg-if v1.0.4
+  Downloaded aho-corasick v1.1.4
+  Downloaded num_cpus v1.17.0
+  Downloaded is_executable v1.0.6
+  Downloaded uuid v1.23.4
+  Downloaded bitflags v2.13.0
+  Downloaded strum v0.28.0
+  Downloaded typed-arena v2.0.2
+  Downloaded find-msvc-tools v0.1.9
+  Downloaded unicase v2.9.0
+  Downloaded roff v1.1.1
+  Downloaded dirs v6.0.0
+  Downloaded digest-io v0.1.0
+  Downloaded semver v1.0.28
+  Downloaded shellexpand v3.1.2
+  Downloaded block-buffer v0.12.1
+  Downloaded once_cell v1.21.4
+  Downloaded snafu-derive v0.9.1
+  Downloaded unicode-ident v1.0.24
+  Downloaded itoa v1.0.18
+  Downloaded regex v1.12.4
+  Downloaded tempfile v3.27.0
+  Downloaded unicode-segmentation v1.13.3
+  Downloaded snafu v0.9.1
+  Downloaded typenum v1.20.1
+  Downloaded rayon-core v1.13.0
+  Downloaded hybrid-array v0.4.13
+  Downloaded sha2 v0.11.0
+  Downloaded unicode-width v0.2.2
+  Downloaded is_terminal_polyfill v1.70.2
+  Downloaded errno v0.3.14
+  Downloaded blake3 v1.8.5
+  Downloaded regex-syntax v0.8.11
+  Downloaded chrono v0.4.45
+  Downloaded bstr v1.12.3
+  Downloaded pulldown-cmark v0.13.4
+  Downloaded memchr v2.8.2
+  Downloaded lexiclean v0.0.1
+  Downloaded rustix v1.1.4
+  Downloaded nix v0.31.3
+  Downloaded crossbeam-epoch v0.9.18
+  Downloaded constant_time_eq v0.4.2
+  Downloaded cc v1.2.65
+  Downloaded camino v1.2.4
+  Downloaded similar v3.1.1
+  Downloaded rand_core v0.10.1
+  Downloaded regex-automata v0.4.14
+  Downloaded rand v0.10.1
+  Downloaded iana-time-zone v0.1.65
+  Downloaded digest v0.11.3
+  Downloaded clap_mangen v0.3.0
+  Downloaded shlex v2.0.1
+  Downloaded nu-ansi-term v0.50.3
+  Downloaded fastrand v2.4.1
+  Downloaded dirs-sys v0.5.0
+  Downloaded crypto-common v0.2.2
+  Downloaded colorchoice v1.0.5
+  Downloaded chacha20 v0.10.1
+  Downloaded terminal_size v0.4.4
+  Downloaded strum_macros v0.28.0
+  Downloaded quote v1.0.46
+  Downloaded memmap2 v0.9.11
+  Downloaded cpufeatures v0.3.0
+  Downloaded getrandom v0.4.3
+  Downloaded crossbeam-deque v0.8.6
+  Downloaded const-oid v0.10.2
+  Downloaded clap_complete v4.6.5
+  Downloaded linux-raw-sys v0.12.1
+   Compiling proc-macro2 v1.0.106
+   Compiling quote v1.0.46
+   Compiling unicode-ident v1.0.24
+   Compiling libc v0.2.186
+   Compiling bitflags v2.13.0
+   Compiling rustix v1.1.4
+   Compiling cfg-if v1.0.4
+   Compiling syn v2.0.118
+   Compiling heck v0.5.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling utf8parse v0.2.2
+   Compiling typenum v1.20.1
+   Compiling crossbeam-utils v0.8.21
+   Compiling hybrid-array v0.4.13
+   Compiling anstyle-parse v1.0.0
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling getrandom v0.4.3
+   Compiling anstyle-query v1.1.5
+   Compiling memchr v2.8.2
+   Compiling serde_core v1.0.228
+   Compiling anstyle v1.0.14
+   Compiling rand_core v0.10.1
+   Compiling anstream v1.0.0
+   Compiling terminal_size v0.4.4
+   Compiling cpufeatures v0.3.0
+   Compiling clap_lex v1.1.0
+   Compiling find-msvc-tools v0.1.9
+   Compiling rayon-core v1.13.0
+   Compiling strsim v0.11.1
+   Compiling shlex v2.0.1
+   Compiling autocfg v1.5.1
+   Compiling clap_builder v4.6.0
+   Compiling num-traits v0.2.19
+   Compiling cc v1.2.65
+   Compiling crossbeam-epoch v0.9.18
+   Compiling clap_derive v4.6.1
+   Compiling block-buffer v0.12.1
+   Compiling crypto-common v0.2.2
+   Compiling const-oid v0.10.2
+   Compiling zmij v1.0.21
+   Compiling option-ext v0.2.0
+   Compiling serde v1.0.228
+   Compiling cfg_aliases v0.2.1
+   Compiling nix v0.31.3
+   Compiling digest v0.11.3
+   Compiling dirs-sys v0.5.0
+   Compiling clap v4.6.1
+   Compiling blake3 v1.8.5
+   Compiling crossbeam-deque v0.8.6
+   Compiling aho-corasick v1.1.4
+   Compiling serde_derive v1.0.228
+   Compiling pulldown-cmark v0.13.4
+   Compiling serde_json v1.0.150
+   Compiling regex-syntax v0.8.11
+   Compiling camino v1.2.4
+   Compiling dirs v6.0.0
+   Compiling chacha20 v0.10.1
+   Compiling strum_macros v0.28.0
+   Compiling snafu-derive v0.9.1
+   Compiling regex-automata v0.4.14
+   Compiling memmap2 v0.9.11
+   Compiling constant_time_eq v0.4.2
+   Compiling arrayref v0.3.9
+   Compiling is_executable v1.0.6
+   Compiling unicode-segmentation v1.13.3
+   Compiling just v1.55.1
+   Compiling once_cell v1.21.4
+   Compiling fastrand v2.4.1
+   Compiling arrayvec v0.7.7
+   Compiling shlex v1.3.0
+   Compiling roff v1.1.1
+   Compiling unicase v2.9.0
+   Compiling itoa v1.0.18
+   Compiling iana-time-zone v0.1.65
+   Compiling chrono v0.4.45
+   Compiling regex v1.12.4
+   Compiling clap_mangen v0.3.0
+   Compiling clap_complete v4.6.5
+   Compiling tempfile v3.27.0
+   Compiling similar v3.1.1
+   Compiling snafu v0.9.1
+   Compiling strum v0.28.0
+   Compiling rand v0.10.1
+   Compiling shellexpand v3.1.2
+   Compiling sha2 v0.11.0
+   Compiling digest-io v0.1.0
+   Compiling uuid v1.23.4
+   Compiling num_cpus v1.17.0
+   Compiling unicode-width v0.2.2
+   Compiling percent-encoding v2.3.2
+   Compiling dotenvy v0.15.7
+   Compiling nu-ansi-term v0.50.3
+   Compiling lexiclean v0.0.1
+   Compiling semver v1.0.28
+   Compiling hex v0.4.3
+   Compiling typed-arena v2.0.2
+    Finished `release` profile [optimized] target(s) in 2m 39s
+  Installing /home/wdecoded92/.cargo/bin/just
+   Installed package `just v1.55.1` (executable `just`)
+[0;32m[OK][0m just: ./scripts/run_gate1_cloudshell.sh: line 128: just: command not found
+
+[0;36m[1m▶ STEP: 5. Noir (nargo) via noirup — version 1.0.0-beta.9[0m
+
+[0;32m[OK][0m Installing noirup...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1423  100  1423    0     0  11882      0 --:--:-- --:--:-- --:--:-- 11957
+Installing noirup...
+#=#=#                                                                          ##O#-#                                                                         ######################################################################## 100.0%
+
+Detected your preferred shell is bash and added noirup to PATH. Run 'source /home/wdecoded92/.bashrc' or start a new terminal session to use noirup.
+Then, simply run 'noirup' to install Nargo.
+[0;32m[OK][0m noirup installed — installing nargo 1.0.0-beta.9
+noirup: installing Noir binaries (version v1.0.0-beta.9 with tag v1.0.0-beta.9)
+noirup: downloading latest Noir binaries to '/home/wdecoded92/.nargo/bin'
+##O#-  #                                                                                                             #################################################                                                               45.1%########################################################################################                        80.5%############################################################################################################## 100.0%
+noirup: done
+[0;32m[OK][0m nargo: nargo version = 1.0.0-beta.9
+
+[0;36m[1m▶ STEP: 6. Barretenberg (bb) via bbup — version 0.87.0[0m
+
+[0;32m[OK][0m Installing bbup...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1340  100  1340    0     0   8258      0 --:--:-- --:--:-- --:--:--  8271
+Installing bbup...
+######################################################################## 100.0%
+
+Detected your preferred shell is bash and added bbup to PATH. Run 'source /home/wdecoded92/.bashrc' or start a new terminal session to use bbup.
+Then, simply run 'bbup' to install bb.
+[0;32m[OK][0m bbup installed — installing bb 0.87.0
+bbup: installing bb (version v0.87.0 with tag aztec-packages-v0.87.0)
+bbup: downloading bb to '/home/wdecoded92/.bb'
+############################################################################################################## 100.0%
+
+gzip: stdin: not in gzip format
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+bbup: done
+[0;31m[FAIL][0m bb not found after bbup install. Check if release-assets.githubusercontent.com is reachable.
+
+GATE 1 STATUS: BLOCKED_TECHNICAL — bb not found after bbup install. Check if release-assets.githubusercontent.com is reachable.

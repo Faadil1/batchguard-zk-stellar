@@ -1,0 +1,30 @@
+gate_3_result:
+  classification: PASS
+  evidence_label: LOCAL
+  product: BatchGuard ZK
+  circuit: invoice_batch
+  verifier: Stellar Soroban UltraHonk verifier
+  network: "local Stellar Standalone Network ; February 2017"
+  contract_id: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
+  dataset: circuits/invoice_batch/target
+  public_inputs:
+    per_invoice_limit: 2500
+    batch_total_limit: 7000
+    max_vendor_risk: 5
+    batch_commitment: 5042103274
+    public_inputs_size_bytes: 128
+  valid_proof:
+    status: ACCEPTED_ON_CHAIN
+    result: "Proof successfully verified on-chain"
+    proof_size_bytes: 14592
+    cpu_instructions: 78110594
+    min_resource_fee_stroops: 881756
+    tx_envelope_size_bytes: 15084
+  invalid_proof:
+    status: REJECTED_ON_CHAIN
+    tamper_method: "flipped first byte of invoice_batch proof"
+    valid_sha256: "4df740d112b97fc9acbe24a0e6b86d5f84bd4f145eeaf459c9f36e096e19d2f9"
+    tampered_sha256: "121e68f26ab77b3466c032dff2f0df44e2ca9c57a9b810b671cc3755af7429d0"
+    result: "transaction simulation failed: HostError: Error(Contract, #4)"
+  conclusion: "BatchGuard private invoice batch proof is verified by a Stellar Soroban smart contract. Valid proof accepted, tampered proof rejected."
+next_action: "Freeze technical proof, create submission repo/package, README, demo script, and evidence summary."

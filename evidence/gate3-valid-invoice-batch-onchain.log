@@ -1,0 +1,34 @@
+./scripts/verify.sh CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
+[0;34m--- Artifact Summary ---[0m
+Public Inputs : 128 bytes
+Proof         : 14592 bytes
+------------------------
+[0;34mInvoking verify_proof on contract CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I...[0m
+ℹ️  Simulating transaction…
+ℹ️  Signing transaction: f5d12685edcb63edc5d89cf64b93b219feea1933a20858ad1c6addbcd721805f
+🌎 Sending transaction…
+✅ Transaction submitted successfully!
+null
+
+[0;32mProof successfully verified on-chain![0m
+
+[0;34mGenerating detailed performance report...[0m
+
+> ultrahonk-measure@1.0.0 measure
+> ts-node measure_ultrahonk_costs.ts --contract-id CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I --source-secret SAS4UIAOIXKUSN7R3S3LFOWIPCXQE6FQQ4D2ZOMGTTKYCG7F4D6SXRAY --dataset /home/wdecoded92/batchguard-zk-gate1/rs-soroban-ultrahonk/circuits/invoice_batch/target --rpc-url http://localhost:8000/soroban/rpc --network-passphrase Standalone Network ; February 2017
+
+Dataset       : /home/wdecoded92/batchguard-zk-gate1/rs-soroban-ultrahonk/circuits/invoice_batch/target
+Contract ID   : CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
+Method        : verify_proof
+Source account: GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ
+
+[1m[36m=== Performance Report: verify_proof ===[0m
+[1mCPU Instructions         [0m : 78,110,594 (78.11% of limit)
+[1mLedger Read Bytes        [0m : 0
+[1mLedger Write Bytes       [0m : 0
+[1mMin Resource Fee         [0m : 881756 stroops (0.0881756 XLM)
+[1mTx Envelope Size         [0m : 15,084 bytes
+[1mProof Size               [0m : 14,592 bytes
+[1mPublic Inputs Size       [0m : 128 bytes
+[36m====================================================[0m
+

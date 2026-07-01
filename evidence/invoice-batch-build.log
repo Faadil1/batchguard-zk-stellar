@@ -1,0 +1,12 @@
+bash ./circuits/scripts/build_all.sh invoice_batch
+=== Building invoice_batch ===
+[invoice_batch] Circuit witness successfully solved
+[invoice_batch] Witness saved to target/invoice_batch.gz
+Scheme is: ultra_honk, num threads: 4
+Public inputs saved to "target/public_inputs"
+Public inputs fields saved to "target/public_inputs_fields.json"
+Proof saved to "target/proof"
+Proof fields saved to "target/proof_fields.json"
+Scheme is: ultra_honk, num threads: 4
+VK saved to "target/vk"
+VK fields saved to "target/vk_fields.json"

@@ -2,7 +2,7 @@
 
 ## Status
 
-TECHNICAL_CORE_PASS / PACKAGING
+SUBMITTED_READY / TECHNICAL_CORE_FROZEN
 
 ## Product
 
@@ -19,13 +19,13 @@ BatchGuard proves that a private batch of 4 invoices satisfies public payment po
 PASS / LOCAL
 
 - UltraHonk proof accepted by Stellar Soroban localnet.
-- Tampered proof rejected by same contract.
+- Tampered proof rejected by the same contract.
 
 ### Gate 2 — Product circuit
 
 PASS / LOCAL
 
-- Circuit: invoice_batch
+- Circuit: invoice_batch.
 - Valid batch proof generated.
 - Noir test passed.
 - Invalid invoice amount rejected during witness/proof generation.
@@ -34,7 +34,7 @@ PASS / LOCAL
 
 PASS / LOCAL
 
-- Contract ID: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I
+- Contract ID: CAEQOYLJA2CAUMOX5KMRV27TAQDRGB2JR3AFVTI6KSNOBXKXNEF4KI3I.
 - Valid BatchGuard proof accepted on-chain.
 - Tampered BatchGuard proof rejected on-chain.
 

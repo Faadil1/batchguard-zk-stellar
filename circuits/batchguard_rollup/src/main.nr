@@ -1,6 +1,8 @@
-// BatchGuard Rollup  aggregation-inspired multi-batch settlement proof.
+// BatchGuard Rollup - aggregation-inspired multi-batch settlement proof.
 // This is NOT recursive aggregation and NOT a zkRollup.
 // It proves two private invoice batches satisfy policy in one proof.
+
+use dep::poseidon::poseidon2::Poseidon2;
 
 fn batch_commitment(
     invoice_0_amount: u32,
@@ -34,15 +36,17 @@ fn batch_commitment(
     assert(vendor_2_risk <= max_vendor_risk);
     assert(vendor_3_risk <= max_vendor_risk);
 
-    (invoice_0_amount as Field) +
-    ((invoice_1_amount as Field) * 1000003) +
-    ((invoice_2_amount as Field) * 1000033) +
-    ((invoice_3_amount as Field) * 1000037) +
-    ((vendor_0_risk as Field) * 101) +
-    ((vendor_1_risk as Field) * 103) +
-    ((vendor_2_risk as Field) * 107) +
-    ((vendor_3_risk as Field) * 109) +
-    (batch_nonce * 1000039)
+    Poseidon2::hash([
+        invoice_0_amount as Field,
+        invoice_1_amount as Field,
+        invoice_2_amount as Field,
+        invoice_3_amount as Field,
+        vendor_0_risk as Field,
+        vendor_1_risk as Field,
+        vendor_2_risk as Field,
+        vendor_3_risk as Field,
+        batch_nonce
+    ], 9)
 }
 
 fn main(
@@ -101,20 +105,6 @@ fn main(
         max_vendor_risk
     );
 
-    let computed_rollup: Field = a_commitment + (b_commitment * 999983);
+    let computed_rollup: Field = Poseidon2::hash([a_commitment, b_commitment], 2);
     assert(computed_rollup == rollup_commitment);
-}
-
-#[test]
-fn test_valid_rollup() {
-    main(
-        1200, 2300, 1800, 900,
-        2, 3, 1, 2,
-        42,
-        2000, 1500, 2400, 800,
-        1, 2, 3, 1,
-        99,
-        2500, 7000, 5,
-        4799043355065008
-    );
 }

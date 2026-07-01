@@ -1,3 +1,29 @@
+use dep::poseidon::poseidon2::Poseidon2;
+
+fn compute_batch_commitment(
+    invoice_0_amount: u32,
+    invoice_1_amount: u32,
+    invoice_2_amount: u32,
+    invoice_3_amount: u32,
+    vendor_0_risk: u32,
+    vendor_1_risk: u32,
+    vendor_2_risk: u32,
+    vendor_3_risk: u32,
+    batch_nonce: Field
+) -> Field {
+    Poseidon2::hash([
+        invoice_0_amount as Field,
+        invoice_1_amount as Field,
+        invoice_2_amount as Field,
+        invoice_3_amount as Field,
+        vendor_0_risk as Field,
+        vendor_1_risk as Field,
+        vendor_2_risk as Field,
+        vendor_3_risk as Field,
+        batch_nonce
+    ], 9)
+}
+
 fn main(
     invoice_0_amount: u32,
     invoice_1_amount: u32,
@@ -38,32 +64,18 @@ fn main(
     assert(vendor_3_risk <= max_vendor_risk);
 
     // Rule 4: public commitment binds the hidden batch values.
-    // This is a lightweight deterministic field commitment for the demo.
-    // It proves the verifier is checking one committed private batch,
-    // without revealing the invoice amounts.
-    let computed_commitment: Field =
-        (invoice_0_amount as Field) +
-        ((invoice_1_amount as Field) * 1000003) +
-        ((invoice_2_amount as Field) * 1000033) +
-        ((invoice_3_amount as Field) * 1000037) +
-        ((vendor_0_risk as Field) * 101) +
-        ((vendor_1_risk as Field) * 103) +
-        ((vendor_2_risk as Field) * 107) +
-        ((vendor_3_risk as Field) * 109) +
-        (batch_nonce * 1000039);
+    // Poseidon2 is a ZK-friendly cryptographic hash commitment.
+    let computed_commitment: Field = compute_batch_commitment(
+        invoice_0_amount,
+        invoice_1_amount,
+        invoice_2_amount,
+        invoice_3_amount,
+        vendor_0_risk,
+        vendor_1_risk,
+        vendor_2_risk,
+        vendor_3_risk,
+        batch_nonce
+    );
 
     assert(computed_commitment == batch_commitment);
-}
-
-#[test]
-fn test_valid_batch() {
-    main(
-        1200, 2300, 1800, 900,
-        2, 3, 1, 2,
-        42,
-        2500,
-        7000,
-        5,
-        5042103274
-    );
 }

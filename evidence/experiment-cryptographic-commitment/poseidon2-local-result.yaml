@@ -1,0 +1,36 @@
+status: PASS_VERIFY_LOCAL
+branch: experiment/cryptographic-commitment
+scope: experimental_only_not_submission_main
+
+commitment_upgrade:
+  previous: field_arithmetic_weighted_sum
+  new: Poseidon2_ZK_friendly_hash_commitment
+
+invoice_batch:
+  commitment: "2071435472592763401459141063555966514150953358794378107879303382763683563057"
+  nargo_check: PASS
+  nargo_execute: PASS
+  bb_prove: PASS
+  bb_verify: PASS
+  proof_size: "15K"
+  public_inputs_size: "128 bytes"
+
+batchguard_rollup:
+  rollup_commitment: "4937466332475313042897415155734142846319297193916309395964716254277206102134"
+  nargo_check: PASS
+  nargo_execute: PASS
+  bb_prove: PASS
+  bb_verify: PASS
+  proof_size: "15K"
+  public_inputs_size: "128 bytes"
+
+verification:
+  oracle_hash: keccak
+  scheme: ultra_honk
+  bb_version: "0.87.0"
+
+limitations:
+  - "Local proof verification only."
+  - "Not deployed to Stellar public testnet yet."
+  - "Not merged to main."
+  - "Submission freeze remains dea13e4 / submission-freeze-dea13e4."

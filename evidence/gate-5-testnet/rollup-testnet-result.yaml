@@ -1,0 +1,27 @@
+gate: 5B
+name: batchguard_rollup_public_testnet_verification
+status: PASS_TESTNET
+network: stellar_public_testnet
+network_passphrase: "Test SDF Network ; September 2015"
+source_account: alice
+source_address: "GDHTFLXBRI6XR7YCXX4NK6RV6QS5S53ULPNXSW2EGMZQ4RI5FZ2NLTSZ"
+contract_id: "CDAKRLEFLMGUZAJST4Q6DR7PQYTFITXF42IXG3PFRNCCLLNZALAQWDCW"
+circuit: circuits/batchguard_rollup
+contract_wasm: target/wasm32v1-none/release/rs_soroban_ultrahonk.wasm
+proof_artifacts:
+  public_inputs: circuits/batchguard_rollup/target/public_inputs
+  proof: circuits/batchguard_rollup/target/proof
+artifact_sizes:
+  public_inputs_bytes: 128
+  proof_bytes: 14592
+valid_result: accepted_by_soroban_public_testnet
+valid_submission: transaction_submitted_successfully
+tampered_result: rejected_during_soroban_public_testnet_simulation
+tamper_method: first_proof_byte_xor_0xff
+tamper_error: "HostError: Error(Contract, #4)"
+framing: "Aggregation-inspired multi-batch proof: two private batches, one proof, one Soroban verification. Not recursive proof aggregation and not a zkRollup."
+stellar_expert_tx_links_file: evidence/gate-5-testnet/rollup_testnet_tx_links.txt
+evidence_log: evidence/gate-5-testnet/rollup-testnet.log
+status_file: evidence/gate-5-testnet/rollup_testnet_status.txt
+base_commit: "61f0df9"
+scope_note: "Public Stellar testnet verification for BatchGuard Rollup extension. This is not mainnet, not production readiness, not recursive proof aggregation, and not a zkRollup. Tampered proof rejection occurred during Soroban testnet transaction simulation before submission."

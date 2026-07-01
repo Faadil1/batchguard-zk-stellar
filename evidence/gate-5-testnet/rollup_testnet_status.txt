@@ -1,0 +1,1 @@
+PASS_TESTNET: valid rollup proof accepted and tampered rollup proof rejected
